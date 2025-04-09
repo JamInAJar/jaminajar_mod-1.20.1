@@ -16,7 +16,7 @@ public enum ModToolMaterials implements ToolMaterial {
 	BOOM_TUBE(MiningLevels.WOOD,640,0.1f,5f,4,()->Ingredient.ofItems(Items.PAPER)),
 	MARSHMALLOW_STICK(MiningLevels.STONE,1053,0.1f,0f,10,()->Ingredient.ofItems(Items.SLIME_BALL)),
 	NETHERITE_MARSHMALLOW_STICK(MiningLevels.NETHERITE,2537,0.1f,0f,25,()->Ingredient.ofItems(Items.NETHERITE_SCRAP)),
-	HELICOPTER_SWORD(MiningLevels.DIAMOND,3521,0.1f,7f,10,()->Ingredient.ofItems(Items.REDSTONE))
+	HELICOPTER_SWORD(MiningLevels.DIAMOND,6321,0.1f,7f,10,()->Ingredient.ofItems(Items.REDSTONE))
 	;
 
 

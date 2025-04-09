@@ -62,7 +62,7 @@ public class MarshmallowStickItem extends ToolItem {
         );
         this.applyFoodEffects(stack, world, user);
         if (!(user instanceof PlayerEntity) || !((PlayerEntity)user).getAbilities().creativeMode) {
-            stack.damage(250*(3-yesCooked-yesNetherite),
+            stack.damage(250*(3+yesCooked-yesNetherite),
                     user,
                     e -> e.sendEquipmentBreakStatus(
                             user.getActiveHand() == Hand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND));
