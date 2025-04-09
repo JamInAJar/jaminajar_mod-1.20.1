@@ -1,10 +1,10 @@
 package io.github.jaminajar.jaminajarmod.items.custom;
 
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 import io.github.jaminajar.jaminajarmod.effects.GooedEffect;
 import io.github.jaminajar.jaminajarmod.enchantment.GooeynessEnchantment;
-import io.github.jaminajar.jaminajarmod.items.ModItems;
 import io.github.jaminajar.jaminajarmod.items.ModToolMaterials;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,17 +20,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Objects;
 
 
 public class MarshmallowStickItem extends ToolItem {
+    private final float attackDamage;
     private final int yesCooked;
     private final int yesNetherite;
-    public MarshmallowStickItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Settings settings, int yesCooked, int yesNetherite) {
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
+
+    public MarshmallowStickItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings, int yesCooked, int yesNetherite) {
         super(toolMaterial, settings);
+        this.attackDamage = (float) attackDamage + toolMaterial.getAttackDamage();
         this.yesCooked = yesCooked;
         this.yesNetherite = yesNetherite;
 
@@ -39,9 +42,12 @@ public class MarshmallowStickItem extends ToolItem {
                 "Weapon modifier", attackDamage, EntityAttributeModifier.Operation.ADDITION));
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID,
                 "Weapon modifier", attackSpeed, EntityAttributeModifier.Operation.ADDITION));
-        builder.build();
+        this.attributeModifiers = builder.build();
     }
-
+    @Override
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
+    }
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         world.playSound(
@@ -74,29 +80,29 @@ public class MarshmallowStickItem extends ToolItem {
             }
         }
     }
-    public void setCooked(ItemStack stack,int cookedness){
-        stack.getOrCreateNbt().putInt("Cookedness", MathHelper.clamp(cookedness,0,yesCooked));
-    }
-    public void setNetherite(ItemStack stack,int netherited){
-        stack.getOrCreateNbt().putInt("Netherited", MathHelper.clamp(netherited,0,yesNetherite));
-    }
+    ///public void setCooked(ItemStack stack,int cookedness){
+    ///    stack.getOrCreateNbt().putInt("Cookedness", MathHelper.clamp(cookedness,0,yesCooked));
+    ///}
+    ///public void setNetherite(ItemStack stack,int netherited){
+    ///    stack.getOrCreateNbt().putInt("Netherited", MathHelper.clamp(netherited,0,yesNetherite));
+    ///}
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        boolean superHit = postHit(stack, target, attacker);
+        boolean superHit = super.postHit(stack, target, attacker);
         StatusEffectInstance gooedEffect;
-        if (stack.getItem()== ModItems.MARSHMALLOW_STICK) {
-            setCooked(stack,0);
-            setNetherite(stack,0);
-        } else if (stack.getItem()==ModItems.COOKED_MARSHMALLOW_STICK){
-            setCooked(stack,1);
-            setNetherite(stack,0);
-        }else if (stack.getItem()==ModItems.NETHERITE_MARSHMALLOW_STICK){
-            setCooked(stack,0);
-            setNetherite(stack,1);
-        }else if (stack.getItem()==ModItems.COOKED_NETHERITE_MARSHMALLOW_STICK){
-            setCooked(stack,1);
-            setNetherite(stack,1);
-        }
+        ///if (stack.getItem()== ModItems.MARSHMALLOW_STICK) {
+        ///    setCooked(stack,0);
+        ///    setNetherite(stack,0);
+        ///} else if (stack.getItem()==ModItems.COOKED_MARSHMALLOW_STICK){
+        ///    setCooked(stack,1);
+        ///    setNetherite(stack,0);
+        ///}else if (stack.getItem()==ModItems.NETHERITE_MARSHMALLOW_STICK){
+        ///    setCooked(stack,0);
+        ///    setNetherite(stack,1);
+        ///}else if (stack.getItem()==ModItems.COOKED_NETHERITE_MARSHMALLOW_STICK){
+        ///    setCooked(stack,1);
+        ///    setNetherite(stack,1);
+        ///}
         int netheriteBooleanVar = stack.getOrCreateNbt().getInt("Netherited")+1;
         int cookedBooleanVar = stack.getOrCreateNbt().getInt("Cooked")+1;
         gooedEffect = new StatusEffectInstance(
@@ -104,9 +110,7 @@ public class MarshmallowStickItem extends ToolItem {
                     EnchantmentHelper.getLevel(new GooeynessEnchantment(), stack)*(10+2*netheriteBooleanVar)+10*cookedBooleanVar,
                     cookedBooleanVar*EnchantmentHelper.getLevel(new GooeynessEnchantment(), stack)
             );
-
         target.setStatusEffect(gooedEffect, attacker);
         return superHit;
     }
-
 }

@@ -24,6 +24,7 @@ public class JamInAJarMod implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 		ModItems.registerModItems();
+
 		ModLootTableModifiers.modifyLootTables();
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"blast"),BLAST);
 	}

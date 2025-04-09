@@ -15,6 +15,7 @@ public class HelicopterSwordItem extends SwordItem {
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         super.usageTick(world, user, stack, remainingUseTicks);
+
         if (!user.isOnGround()){
             float f = user.getYaw();
             float g = user.getPitch();

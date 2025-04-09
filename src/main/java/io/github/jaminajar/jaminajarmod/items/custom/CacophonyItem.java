@@ -7,76 +7,85 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Vanishable;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
+/// straight up now working rn will try to fix
+/// if any advice or fixes pls lmk
 public class CacophonyItem extends Item implements Vanishable {
     private static final int MAX_USE_TIME = 600;
+    private static final String TICKS_USED_KEY = "TicksUsed";
+
     public CacophonyItem(Settings settings) {
         super(settings);
     }
 
     @Override
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.SPEAR;
+        return UseAction.TOOT_HORN;
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        System.out.println("Cacophony Used");
+        user.playSound(SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK,1.0F,1.0F);
+        itemStack.getOrCreateNbt().putInt(TICKS_USED_KEY, 0); // Reset on use
         user.setCurrentHand(hand);
 
-        int ticksUsed = 0;
         if (!world.isClient) {
             HonkProjectileEntity honkProjectileEntity = new HonkProjectileEntity(world, user);
             honkProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 10.0f, 0.2f);
 
-            Vec3d aimPoint = user.getPos().add(user.getRotationVector().multiply(30));
-            ServerWorld serverWorld = (ServerWorld) world;
+            if (world instanceof ServerWorld serverWorld) {
+                serverWorld.spawnEntity(honkProjectileEntity); // Spawn once
 
-            if (world instanceof ServerWorld) {
-                for (int o = 1; o < MathHelper.floor(aimPoint.length()) + 7; o++) {
+                // Add some particles for flair
+                Vec3d pos = honkProjectileEntity.getPos();
+                for (int i = 0; i < 8; i++) {
                     serverWorld.spawnParticles(ParticleTypes.SONIC_BOOM,
-                            honkProjectileEntity.getX(),
-                            honkProjectileEntity.getY(),
-                            honkProjectileEntity.getZ(),
-                            1,
-                            0.0,
-                            0.0,
-                            0.0,
-                            0.0);
-                    serverWorld.spawnEntity(honkProjectileEntity);
+                            pos.x, pos.y, pos.z,
+                            1, 0.0, 0.0, 0.0, 0.0);
                 }
             }
 
             user.playSound(SoundEvents.ENTITY_WARDEN_SONIC_BOOM, 3.0F, 1.0F);
-            ticksUsed++;
         }
-        user.getItemCooldownManager().set(this, ticksUsed);
-        return TypedActionResult.success(itemStack);
+
+        return TypedActionResult.success(itemStack, world.isClient());
     }
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
-        super.usageTick(world, user, stack, remainingUseTicks);
-        for (int i = 0; i < 3; i++) {
-            if(!world.isClient()) {
-                NoteProjectileEntity noteProjectileEntity = new NoteProjectileEntity(world, user);
-                noteProjectileEntity.setVelocity(user,
-                        user.getPitch(),
-                        user.getYaw(),
-                        0.0F,
-                        3.5F + (world.getRandom().nextFloat() - 0.5F),
-                        2.0F + (world.getRandom().nextFloat() - 0.5F));
-                world.spawnEntity(noteProjectileEntity);
-            }
+        if (!world.isClient()) {
+            NoteProjectileEntity noteProjectileEntity = new NoteProjectileEntity(world, user);
+            noteProjectileEntity.setVelocity(user,
+                    user.getPitch(),
+                    user.getYaw(),
+                    0.0F,
+                    3.5F + (world.getRandom().nextFloat() - 0.5F),
+                    2.0F + (world.getRandom().nextFloat() - 0.5F));
+            world.spawnEntity(noteProjectileEntity);
+
+            // Increment ticks used in NBT
+            NbtCompound nbt = stack.getOrCreateNbt();
+            int ticksUsed = nbt.getInt(TICKS_USED_KEY);
+            nbt.putInt(TICKS_USED_KEY, ticksUsed + 1);
+        }
+    }
+
+    @Override
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        if (!world.isClient && user instanceof PlayerEntity player) {
+            int ticksUsed = stack.getOrCreateNbt().getInt(TICKS_USED_KEY);
+            int cooldown = Math.max(ticksUsed / 2, 20); // At least 1 second
+            player.getItemCooldownManager().set(this, cooldown);
         }
     }
 

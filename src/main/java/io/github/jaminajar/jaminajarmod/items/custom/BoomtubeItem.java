@@ -6,6 +6,7 @@ import io.github.jaminajar.jaminajarmod.enchantment.BlastEnchantment;
 import io.github.jaminajar.jaminajarmod.items.ModToolMaterials;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -25,14 +26,18 @@ import java.util.List;
 
 public class BoomtubeItem extends ToolItem {
     private final int maxGunpowder;
-    private final float attackDamage;
-    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
+    public int enchant = 0;
     public int explosionPower = 2;
     String gunpowderTooltipDisplay = "";
-    public BoomtubeItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Settings settings, int maxGunpowder) {
-        super(toolMaterial, settings);
+    private final float attackDamage;
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
+    public BoomtubeItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings, int maxGunpowder) {
+        super(toolMaterial, settings);
         this.attackDamage = attackDamage + toolMaterial.getAttackDamage();
+
+
+
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,
@@ -42,7 +47,10 @@ public class BoomtubeItem extends ToolItem {
         this.attributeModifiers = builder.build();
         this.maxGunpowder = maxGunpowder;
     }
-
+    @Override
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
+    }
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
         if (user.isSneaking()) {
@@ -106,7 +114,8 @@ public class BoomtubeItem extends ToolItem {
 
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean superHit = super.postHit(stack,target,attacker);
-        explosionPower = 2*EnchantmentHelper.getLevel(new BlastEnchantment(), stack)+2;
+        enchant = EnchantmentHelper.getLevel(new BlastEnchantment(), stack);
+        explosionPower = 2*enchant+2;
         if (getGunpowder(stack)<=maxGunpowder && getGunpowder(stack)!=0){
             target.getWorld().createExplosion(target,
                     target.getX(),

@@ -10,6 +10,7 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import io.github.jaminajar.jaminajarmod.items.custom.CacophonyItem;
 
 public class ModItems{
 
@@ -22,7 +23,7 @@ public class ModItems{
 	public static final Item RAVAGER_TOOTH = registerItem("ravager_tooth", new Item(new Item.Settings()));
 	public static final Item RAVAGER_SCREW = registerItem("ravager_screw", new Item(new Item.Settings()));
 	public static final Item SOLBRAND = registerItem("solbrand", new SolbrandItem(ModToolMaterials.SOLBRAND, 10, -2.6f, new Item.Settings().fireproof()));
-	public static final Item BOOM_TUBE = registerItem("boom_tube", new BoomtubeItem(ModToolMaterials.BOOM_TUBE,0, -2.6f,new Item.Settings(),32));
+	public static final Item BOOM_TUBE = registerItem("boom_tube", new BoomtubeItem(ModToolMaterials.BOOM_TUBE,5, -2.6f,new Item.Settings(),32));
 	public static final Item CACOPHONY = registerItem("cacophony",new CacophonyItem(new Item.Settings()));
 	public static final Item BIOSPEAKER = registerItem("biospeaker", new Item(new Item.Settings()));
 	public static final Item NOTEPROJECTILE = registerItem("noteprojectile",new Item(new Item.Settings()));
@@ -46,6 +47,7 @@ public class ModItems{
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
 			entries.add(MACHETE);
 			entries.add(SCISSORS);
+			entries.add(BOOM_TUBE);
 		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
 			entries.add(COMFY_HANDLE);
