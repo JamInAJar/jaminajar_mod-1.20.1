@@ -28,6 +28,10 @@ public class ModEntities {
             new Identifier(JamInAJarMod.MOD_ID,"souler_beam_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC,SoulerBeamProjectile::new)
                     .dimensions(EntityDimensions.fixed(0.4f,0.4f)).trackRangeChunks(4).trackedUpdateRate(10).build());
+    public static final EntityType<HelicopterSwordEntity> HELISWORD_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(JamInAJarMod.MOD_ID,"helisword_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, HelicopterSwordEntity::new)
+            .dimensions(EntityDimensions.fixed(5f,5f)).trackRangeChunks(4).trackedUpdateRate(10).build());
     private World world;
 
 

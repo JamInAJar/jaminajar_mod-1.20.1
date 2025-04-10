@@ -6,15 +6,14 @@
 	"description": "This is an example description! Tell everyone what your mod is about!",
 
 	"credits": [
-		"ShrimpyTruffl3: Owner, Developer",
-		"DaFuqs: Code from Spectrum for Scissorblades"
+		"ShrimpyTruffl3: Owner, Developer"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "MIT",
-	"icon": "assets/jaminajar_mod/icon.png",
+	"icon": "assets/jaminajarmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

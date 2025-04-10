@@ -2,7 +2,6 @@ package io.github.jaminajar.jaminajarmod.items.custom;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -12,14 +11,13 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class HelicopterSwordItem extends SwordItem {
+public class HelicopterBladeItem extends SwordItem {
     double sneakingCoeff;
-    public HelicopterSwordItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
+    public HelicopterBladeItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        System.out.println("Heliblade Used");
         user.setCurrentHand(hand);
         if (!isUsable(this.getDefaultStack())) {
             /// play sound
@@ -45,10 +43,10 @@ public class HelicopterSwordItem extends SwordItem {
                 if (user.isSneaking()) {
                     this.sneakingCoeff = 1.3;
                 }
-                user.addVelocity(h / (9 * sneakingCoeff), k / (6 / sneakingCoeff), l / (9 * sneakingCoeff));
+                user.addVelocity(h / (8 * sneakingCoeff), k / (5 / sneakingCoeff), l / (8 * sneakingCoeff));
                 user.handleFallDamage(0, 3f, user.getDamageSources().fall());
 
-                stack.damage(5,user,e -> e.sendEquipmentBreakStatus(
+                stack.damage(4,user,e -> e.sendEquipmentBreakStatus(
                         user.getActiveHand() == Hand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND));
             } else if (user.isOnGround()) {
                 /// shield shred etc

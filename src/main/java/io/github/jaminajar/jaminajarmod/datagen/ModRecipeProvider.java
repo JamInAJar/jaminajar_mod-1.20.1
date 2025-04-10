@@ -48,7 +48,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('n',Items.NETHERITE_SCRAP)
                 .input('g',Items.IRON_INGOT);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, HELICOPTER_SWORD,1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, HELI_BLADE,1)
                 .pattern("esr")
                 .pattern("bhp")
                 .pattern("esr")
@@ -71,6 +71,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('l', Items.LIGHTNING_ROD);
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.CRIMSON_BLADE,1)
                 .input(REDSTONE_BLOCK,4)
+                .input(PHANTOM_MEMBRANE,2)
                 .input(INCANDESCENT_BLADE,1);
         offerStonecuttingRecipe(exporter, RecipeCategory.MISC, ModItems.RAVAGER_SCREW, ModItems.RAVAGER_TOOTH,2);
         //offerReversibleCompactingRecipes(exporter, RecipeCategory.FOOD, ModItems.MARSHMALLOW, RecipeCategory.BUILDING_BLOCKS,ModBlocks.MARSHMALLOW_SLAB);

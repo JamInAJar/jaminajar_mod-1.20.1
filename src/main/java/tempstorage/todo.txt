@@ -16,3 +16,6 @@ Gooed and Souled status effect icons
 Marshmallows&stick :)
 Solbrand pixel art
 helicopter sword
+
+,
+		"DaFuqs: Code from Spectrum for Scissorblades"

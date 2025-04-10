@@ -26,7 +26,7 @@ public class ModItems{
 	public static final Item BOOM_TUBE = registerItem("boom_tube", new BoomtubeItem(ModToolMaterials.BOOM_TUBE,5, -2.6f,new Item.Settings(),32));
 	public static final Item CACOPHONY = registerItem("cacophony",new CacophonyItem(new Item.Settings()));
 	public static final Item BIOSPEAKER = registerItem("biospeaker", new Item(new Item.Settings()));
-	public static final Item NOTEPROJECTILE = registerItem("noteprojectile",new Item(new Item.Settings()));
+	public static final Item NOTE_PROJECTILE = registerItem("note_projectile",new Item(new Item.Settings()));
 	public static final Item MARSHMALLOW = registerItem("marshmallow",new Item(new Item.Settings().food(ModFoods.MARSHMALLOW)));
 	public static final Item COOKED_MARSHMALLOW = registerItem("cooked_marshmallow",new Item(new Item.Settings().food(ModFoods.COOKED_MARSHMALLOW)));
 	public static final Item MARSHMALLOW_STICK =registerItem("marshmallow_stick",new MarshmallowStickItem(ModToolMaterials.MARSHMALLOW_STICK,4,-2.2f,new Item.Settings().fireproof().food(ModFoods.MARSHMALLOW),0,0));
@@ -36,7 +36,7 @@ public class ModItems{
 	public static final Item SOULER = registerItem("souler", new SoulerItem(new Item.Settings()));
 	public static final Item INCANDESCENT_BLADE = registerItem("incandescent_blade",new Item(new Item.Settings()));
 	public static final Item BLADE_CORE = registerItem("blade_core",new Item(new Item.Settings()));
-	public static final Item HELICOPTER_SWORD = registerItem("helicopter_sword", new HelicopterSwordItem(ModToolMaterials.HELICOPTER_SWORD,0,-2.4f, new Item.Settings().fireproof()));
+	public static final Item HELI_BLADE = registerItem("helicopter_blade", new HelicopterBladeItem(ModToolMaterials.HELI_BLADE,0,-2.4f, new Item.Settings().fireproof()));
 	public static final Item CRIMSON_BLADE = registerItem("crimson_blade",new Item(new Item.Settings().fireproof()));
 	private static Item registerItem(String name, Item item){
 		return Registry.register(Registries.ITEM, new Identifier(JamInAJarMod.MOD_ID, name), item);

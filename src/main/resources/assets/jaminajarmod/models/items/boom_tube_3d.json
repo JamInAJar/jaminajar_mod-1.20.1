@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"2": "jaminajarmod:item/boomtube3d",
+		"2": "jaminajarmod:item/boom_tube3d",
 		"particle": "block/texture"
 	},
 	"elements": [
