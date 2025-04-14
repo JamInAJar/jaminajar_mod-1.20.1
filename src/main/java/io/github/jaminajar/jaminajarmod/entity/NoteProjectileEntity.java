@@ -4,20 +4,23 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
-public class NoteProjectileEntity extends ProjectileEntity implements FlyingItemEntity {
-    public NoteProjectileEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
+public class NoteProjectileEntity extends PersistentProjectileEntity implements FlyingItemEntity {
+    public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world, LivingEntity owner) {
         super(entityType, world);
+        this.setOwner(owner);
+        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
     public NoteProjectileEntity(World world, LivingEntity owner){
-        super(ModEntities.NOTE_PROJECTILE, world);
+        super(ModEntities.NOTE_PROJECTILE, owner, world);
     }
     @Override
     protected void initDataTracker() {
@@ -34,18 +37,28 @@ public class NoteProjectileEntity extends ProjectileEntity implements FlyingItem
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult){
         if (!this.getWorld().isClient()){
-            Entity entity = entityHitResult.getEntity();
-            Entity entity2 = this.getOwner();
-            entity.damage(this.getDamageSources().sonicBoom(this), 1.0F);
-            if (entity2 instanceof LivingEntity) {
-                this.applyDamageEffects((LivingEntity)entity2, entity);
+            Entity target = entityHitResult.getEntity();
+            Entity owner = this.getOwner();
+            target.damage(this.getDamageSources().sonicBoom(this), 0.5F);
+            if (target instanceof LivingEntity) {
+                this.applyDamageEffects((LivingEntity)owner, target);
+            }
+
         }
+
     }
 
-}
+    protected void onCollision(HitResult hitResult){
+        super.onCollision(hitResult);
+    }
+
+    @Override
+    protected ItemStack asItemStack() {
+        return ItemStack.EMPTY;
+    }
 
     @Override
     public ItemStack getStack() {
-        return null;
+        return ItemStack.EMPTY;
     }
 }

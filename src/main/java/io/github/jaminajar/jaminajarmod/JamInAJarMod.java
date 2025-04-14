@@ -14,6 +14,9 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.github.jaminajar.jaminajarmod.effects.ModEffects.GOOED;
+import static io.github.jaminajar.jaminajarmod.effects.ModEffects.SOULED;
+
 public class JamInAJarMod implements ModInitializer {
 	public static final String MOD_ID = "jaminajarmod";
 	public static Enchantment BLAST = new BlastEnchantment();
@@ -30,6 +33,8 @@ public class JamInAJarMod implements ModInitializer {
 		ModItems.registerModItems();
 
 		ModLootTableModifiers.modifyLootTables();
+		Registry.register(Registries.STATUS_EFFECT, new Identifier(JamInAJarMod.MOD_ID, "souled"), SOULED);
+		Registry.register(Registries.STATUS_EFFECT, new Identifier(JamInAJarMod.MOD_ID, "gooed"), GOOED);
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"blast"),BLAST);
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"gooeyness"),GOOEYNESS);
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"smart_pitch"),SMART_PITCH);

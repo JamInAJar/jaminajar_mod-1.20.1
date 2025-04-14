@@ -115,7 +115,7 @@ public class BoomtubeItem extends ToolItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean superHit = super.postHit(stack,target,attacker);
         enchant = EnchantmentHelper.getLevel(new BlastEnchantment(), stack);
-        explosionPower = 2*enchant+2;
+        explosionPower = 5*enchant+2;
         if (getGunpowder(stack)<=maxGunpowder && getGunpowder(stack)!=0){
             target.getWorld().createExplosion(target,
                     target.getX(),

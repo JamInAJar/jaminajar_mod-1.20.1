@@ -8,6 +8,7 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -23,6 +24,9 @@ public class HelicopterBladeItem extends SwordItem {
             /// play sound
         }
         return TypedActionResult.success(itemStack, world.isClient());
+    }
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.TOOT_HORN;
     }
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {

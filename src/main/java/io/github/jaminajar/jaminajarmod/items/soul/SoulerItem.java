@@ -8,32 +8,39 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 
 public class SoulerItem extends Item {
-    double soulEnergyCount = 0;
-    public SoulerItem(Settings settings) {
+    private final int maxSoulEnergyCount;
+    public SoulerItem(Settings settings, int maxSoulEnergyCount) {
         super(settings);
+        this.maxSoulEnergyCount = maxSoulEnergyCount;
+    }
+    public int getSoulEnergyCount(ItemStack stack){return stack.getOrCreateNbt().getInt("SoulEnergy");}
+    public void ChangeSoulEnergy(ItemStack stack, int soulEnergyCount){
+        stack.getOrCreateNbt().putInt("SoulEnergy", MathHelper.clamp(soulEnergyCount,0,maxSoulEnergyCount));
+
     }
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         user.setCurrentHand(hand);
-        if(user.isSneaking()&&Math.floor(soulEnergyCount/3) >=0){
-            soulEnergyCount-=3;
+        ItemStack stack=user.getStackInHand(hand);
+        double soulEnergyCount = this.getSoulEnergyCount(stack);
+        if(user.isSneaking()&&soulEnergyCount!=0){
+            ChangeSoulEnergy(stack, 0);
+            /// laser
 
         }else if(user.isSneaking()&&soulEnergyCount<=0){
             user.sendMessage(Text.literal("No Soul Energy!"),true);
         } else if(!user.isSneaking()){
             if(!world.isClient()) {
-                SoulerSoulProjectile soulerSoulProjectile = new SoulerSoulProjectile(ModEntities.SOULER_SOUL_PROJECTILE, world);
-                soulerSoulProjectile.setVelocity(user,
-                        user.getPitch(),
-                        user.getYaw(),
-                        0.0F,
-                        1.5F,
-                        2.0F);
-                world.spawnEntity(soulerSoulProjectile);
+                SoulerSoulProjectile projectile = new SoulerSoulProjectile(ModEntities.SOULER_SOUL_PROJECTILE, world, user);
+                projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 1.0F);
+                projectile.setNoGravity(true); // or false, depending on behavior
+                world.spawnEntity(projectile);
+                /// <ChangeSoulEnergy(stack, (int) (soulEnergyCount+1));> upon entity hit
             }
         }
         user.getItemCooldownManager().set(this, 20);

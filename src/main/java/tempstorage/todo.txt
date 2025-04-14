@@ -8,6 +8,13 @@ Scissorblade???
 mr squeaky
 shadow realm
 
+fix gooeyness
+fix marshmallow eating
+
+ancient plant tamable/boss stronger sniffer
+
+ned kelly helmet rare creature
+
 sprites/models for:
 Soul canisters
 Souler
@@ -16,6 +23,7 @@ Gooed and Souled status effect icons
 Marshmallows&stick :)
 Solbrand pixel art
 helicopter sword
+
 
 ,
 		"DaFuqs: Code from Spectrum for Scissorblades"

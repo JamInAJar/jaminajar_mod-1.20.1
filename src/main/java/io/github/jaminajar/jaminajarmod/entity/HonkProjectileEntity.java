@@ -4,14 +4,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
-public class HonkProjectileEntity extends ProjectileEntity {
+public class HonkProjectileEntity extends PersistentProjectileEntity {
 
 
-    public HonkProjectileEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
+    public HonkProjectileEntity(EntityType<? extends HonkProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
     public HonkProjectileEntity(World world, LivingEntity owner){
@@ -38,4 +40,9 @@ public class HonkProjectileEntity extends ProjectileEntity {
             }
         }
 }
+
+    @Override
+    protected ItemStack asItemStack() {
+        return null;
+    }
 }
