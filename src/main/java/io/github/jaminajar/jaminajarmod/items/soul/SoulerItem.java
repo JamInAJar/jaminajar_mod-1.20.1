@@ -1,6 +1,7 @@
 package io.github.jaminajar.jaminajarmod.items.soul;
 
 import io.github.jaminajar.jaminajarmod.entity.ModEntities;
+import io.github.jaminajar.jaminajarmod.entity.SoulerBeamProjectile;
 import io.github.jaminajar.jaminajarmod.entity.SoulerSoulProjectile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -30,16 +31,21 @@ public class SoulerItem extends Item {
         double soulEnergyCount = this.getSoulEnergyCount(stack);
         if(user.isSneaking()&&soulEnergyCount!=0){
             ChangeSoulEnergy(stack, 0);
-            /// laser
+            SoulerBeamProjectile soulerBeamProjectile = new SoulerBeamProjectile(ModEntities.SOULER_BEAM_PROJECTILE, world);
+            soulerBeamProjectile.setVelocity(user, user.getPitch(),user.getYaw(),0.0F,100f,0.001f);
+            soulerBeamProjectile.setOwner(user);
+            soulerBeamProjectile.setNoGravity(true);
+            world.spawnEntity(soulerBeamProjectile);
 
         }else if(user.isSneaking()&&soulEnergyCount<=0){
             user.sendMessage(Text.literal("No Soul Energy!"),true);
         } else if(!user.isSneaking()){
             if(!world.isClient()) {
-                SoulerSoulProjectile projectile = new SoulerSoulProjectile(ModEntities.SOULER_SOUL_PROJECTILE, world, user);
-                projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 1.0F);
-                projectile.setNoGravity(true); // or false, depending on behavior
-                world.spawnEntity(projectile);
+                SoulerSoulProjectile soulerSoulProjectile = new SoulerSoulProjectile(ModEntities.SOULER_SOUL_PROJECTILE, world);
+                soulerSoulProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 1.0F);
+                soulerSoulProjectile.setOwner(user);
+                soulerSoulProjectile.setNoGravity(true); // or false, depending on behavior
+                world.spawnEntity(soulerSoulProjectile);
                 /// <ChangeSoulEnergy(stack, (int) (soulEnergyCount+1));> upon entity hit
             }
         }

@@ -12,19 +12,24 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
 public class SoulerBeamProjectile extends PersistentProjectileEntity {
-    public SoulerBeamProjectile(EntityType<? extends SoulerBeamProjectile> entityType, World world, LivingEntity owner) {
+    public SoulerBeamProjectile(EntityType<? extends SoulerBeamProjectile> entityType, World world) {
         super(entityType, world);
-        this.setOwner(owner);
-        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
+
+    public void setOwner(LivingEntity owner) {
+        super.setOwner(owner);  // This ensures the parent class's owner is set
+        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());  // Manually set position
+    }
+
+
+    @Override
     public void tick(){
         super.tick();
         this.setNoGravity(true);
     }
-    @Override
-    protected void initDataTracker() {
 
-    }
+    @Override
+    protected void initDataTracker() {}
 
     protected void onEntityHit(EntityHitResult entityHitResult){
         Entity owner = this.getOwner();
@@ -35,9 +40,10 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
                             .get(RegistryKeys.DAMAGE_TYPE)
                             .entryOf(ModDamageTypes.SOULER_LASERED_DAMAGE));
             target.damage(damageSource, 10.0F);
-            /// hud display???
+            // Additional hit effects
         }
     }
+
     @Override
     protected ItemStack asItemStack() {
         return ItemStack.EMPTY;

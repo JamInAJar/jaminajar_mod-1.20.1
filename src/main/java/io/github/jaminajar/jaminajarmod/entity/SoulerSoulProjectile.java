@@ -20,12 +20,15 @@ import net.minecraft.world.World;
 
 public class SoulerSoulProjectile extends ProjectileEntity {
 
-
-    public SoulerSoulProjectile(EntityType<? extends SoulerSoulProjectile> entityType, World world, LivingEntity owner) {
+    public SoulerSoulProjectile(EntityType<? extends SoulerSoulProjectile> entityType, World world) {
         super(entityType, world);
-        this.setOwner(owner);
+    }
+
+    public void setOwner(LivingEntity owner) {
+        super.setOwner(owner);
         this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
+
 
     @Override
     protected void initDataTracker() {
@@ -44,7 +47,7 @@ public class SoulerSoulProjectile extends ProjectileEntity {
         this.setVelocity(-vec3d.x / 2.0 - vec3d2.x, this.isOnGround() ? Math.min(0.4, vec3d.y / 2.0 + strength) : vec3d.y, -vec3d.z / 2.0 - vec3d2.z);
     }
 
-
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         if (!this.getWorld().isClient()) {
             Entity target1 = entityHitResult.getEntity();
@@ -55,10 +58,10 @@ public class SoulerSoulProjectile extends ProjectileEntity {
             if (target1 instanceof LivingEntity target) {
                 StatusEffectInstance souled = target.getStatusEffect(ModEffects.SOULED);
                 if (souled != null) {
-                    souledStrength = souled.getAmplifier()+1;
+                    souledStrength = souled.getAmplifier() + 1;
                 }
             }
-            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(souledEffect, 30, 7+souledStrength);
+            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(souledEffect, 30, 7 + souledStrength);
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)

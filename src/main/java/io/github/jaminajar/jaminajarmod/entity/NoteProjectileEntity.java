@@ -14,6 +14,10 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
 public class NoteProjectileEntity extends PersistentProjectileEntity implements FlyingItemEntity {
+    public NoteProjectileEntity(EntityType type, World world){
+        super(type, world);
+    }
+
     public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world, LivingEntity owner) {
         super(entityType, world);
         this.setOwner(owner);
