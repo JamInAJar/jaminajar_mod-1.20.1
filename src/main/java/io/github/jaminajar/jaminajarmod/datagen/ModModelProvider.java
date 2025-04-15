@@ -39,8 +39,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BLADE_CORE,Models.GENERATED);
         itemModelGenerator.register(ModItems.CACOPHONY,Models.GENERATED);
         itemModelGenerator.register(ModItems.CRIMSON_BLADE,Models.GENERATED);
-        itemModelGenerator.register(ModItems.HELI_BLADE,Models.GENERATED);
-        itemModelGenerator.register(ModItems.SOULER,Models.GENERATED);
         itemModelGenerator.register(ModItems.MARSHMALLOW_STICK,Models.GENERATED);
         itemModelGenerator.register(ModItems.COOKED_MARSHMALLOW_STICK,Models.GENERATED);
         itemModelGenerator.register(ModItems.NETHERITE_MARSHMALLOW_STICK,Models.GENERATED);

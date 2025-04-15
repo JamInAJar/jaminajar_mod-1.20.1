@@ -15,16 +15,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
-    @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
+    @ModifyVariable(method="renderItem",at=@At(value="HEAD"),argsOnly=true)
     public BakedModel useBoomtubeModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay){
         if(stack.isOf(ModItems.BOOM_TUBE)&&renderMode != ModelTransformationMode.GUI){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"boom_tube_3d","inventory"));
         }
-        return value;
-    }
-    @ModifyVariable(method= "renderItem",at= @At(value= "HEAD"),argsOnly = true)
-    public BakedModel useHelibladeModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay){
-        if(stack.isOf(ModItems.HELI_BLADE)&&renderMode != ModelTransformationMode.GUI){
+        if(stack.isOf(ModItems.HELI_BLADE)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"heli_blade_3d","inventory"));
         }
         return value;

@@ -35,10 +35,6 @@ public class BoomtubeItem extends ToolItem {
     public BoomtubeItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings, int maxGunpowder) {
         super(toolMaterial, settings);
         this.attackDamage = attackDamage + toolMaterial.getAttackDamage();
-
-
-
-
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,
                 "Weapon modifier", attackDamage, EntityAttributeModifier.Operation.ADDITION));
@@ -115,7 +111,7 @@ public class BoomtubeItem extends ToolItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean superHit = super.postHit(stack,target,attacker);
         enchant = EnchantmentHelper.getLevel(new BlastEnchantment(), stack);
-        explosionPower = 5*enchant+2;
+        explosionPower = 80*enchant+4;
         if (getGunpowder(stack)<=maxGunpowder && getGunpowder(stack)!=0){
             target.getWorld().createExplosion(target,
                     target.getX(),

@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Pair;
 import io.github.jaminajar.jaminajarmod.effects.GooedEffect;
 import io.github.jaminajar.jaminajarmod.enchantment.GooeynessEnchantment;
 import io.github.jaminajar.jaminajarmod.items.ModToolMaterials;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +19,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
@@ -72,6 +75,11 @@ public class MarshmallowStickItem extends ToolItem {
 
     private void applyFoodEffects(ItemStack stack, World world, LivingEntity targetEntity) {
         Item item = stack.getItem();
+        super.finishUsing(stack, world, targetEntity);
+        if (targetEntity instanceof ServerPlayerEntity serverPlayerEntity) {
+            Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
+            serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+        }
         if (item.isFood()) {
             for (Pair<StatusEffectInstance, Float> pair : Objects.requireNonNull(item.getFoodComponent()).getStatusEffects()) {
                 if (!world.isClient && pair.getFirst() != null && world.random.nextFloat() < pair.getSecond()) {

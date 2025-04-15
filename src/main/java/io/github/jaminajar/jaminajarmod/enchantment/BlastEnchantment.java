@@ -1,6 +1,7 @@
 package io.github.jaminajar.jaminajarmod.enchantment;
 
 import io.github.jaminajar.jaminajarmod.items.ModItems;
+import io.github.jaminajar.jaminajarmod.items.custom.BoomtubeItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,7 +18,8 @@ public class BlastEnchantment extends Enchantment {
     }
     @Override
     public boolean isAcceptableItem(ItemStack stack){
-        return this.target.isAcceptableItem(ModItems.BOOM_TUBE);
+
+        return stack.getItem() instanceof BoomtubeItem ? true : super.isAcceptableItem(stack);
     }
     @Override
     public int getMaxLevel(){

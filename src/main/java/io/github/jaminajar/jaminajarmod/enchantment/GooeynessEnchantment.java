@@ -1,6 +1,8 @@
 package io.github.jaminajar.jaminajarmod.enchantment;
 
 import io.github.jaminajar.jaminajarmod.items.ModItems;
+import io.github.jaminajar.jaminajarmod.items.custom.BoomtubeItem;
+import io.github.jaminajar.jaminajarmod.items.custom.MarshmallowStickItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,7 +19,7 @@ public class GooeynessEnchantment extends Enchantment {
     }
     @Override
     public boolean isAcceptableItem(ItemStack stack){
-        return this.target.isAcceptableItem(ModItems.MARSHMALLOW_STICK);
+        return stack.getItem() instanceof MarshmallowStickItem ? true : super.isAcceptableItem(stack);
     }
     @Override
     public int getMaxLevel(){
