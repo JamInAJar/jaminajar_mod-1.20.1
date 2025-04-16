@@ -35,10 +35,12 @@ fix gooeyness
 fix marshmallow eating
 
 ancient plant tamable/boss stronger sniffer
-
+5 big booms
 ned kelly helmet rare creature
 
-sprites/models for:
+experienced souler hat/curio
+
+make or implement/fix sprites/models for:
 Soul canisters
 Souler
 Cacophony

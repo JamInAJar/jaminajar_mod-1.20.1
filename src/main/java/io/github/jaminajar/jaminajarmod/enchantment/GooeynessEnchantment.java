@@ -1,7 +1,5 @@
 package io.github.jaminajar.jaminajarmod.enchantment;
 
-import io.github.jaminajar.jaminajarmod.items.ModItems;
-import io.github.jaminajar.jaminajarmod.items.custom.BoomtubeItem;
 import io.github.jaminajar.jaminajarmod.items.custom.MarshmallowStickItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;

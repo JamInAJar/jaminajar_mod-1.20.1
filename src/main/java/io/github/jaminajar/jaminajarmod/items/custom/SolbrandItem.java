@@ -1,6 +1,5 @@
 package io.github.jaminajar.jaminajarmod.items.custom;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;

@@ -3,7 +3,6 @@ package io.github.jaminajar.jaminajarmod.client;
 import io.github.jaminajar.jaminajarmod.items.custom.BoomtubeItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
