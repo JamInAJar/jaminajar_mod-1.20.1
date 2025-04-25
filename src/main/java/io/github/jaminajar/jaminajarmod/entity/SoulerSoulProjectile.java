@@ -9,16 +9,18 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class SoulerSoulProjectile extends ProjectileEntity {
+public class SoulerSoulProjectile extends PersistentProjectileEntity {
 
     public SoulerSoulProjectile(EntityType<? extends SoulerSoulProjectile> entityType, World world) {
         super(entityType, world);
@@ -88,6 +90,16 @@ public class SoulerSoulProjectile extends ProjectileEntity {
                     heldItem.setNbt(tag);
                 }
             }
+            this.discard();
         }
+    }
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult){
+        this.discard();
+    }
+
+    @Override
+    protected ItemStack asItemStack() {
+        return null;
     }
 }

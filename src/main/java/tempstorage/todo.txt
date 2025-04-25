@@ -8,6 +8,13 @@ Scissorblade???
 mr squeaky
 shadow realm
 
+red panda
+unicorn?
+present -> altar
+ancient sniffer - either feed it an old plant or mixin the breeding thign for sniffers to drop an ANCIENT sniffer egg
+snuffer?
+morp
+
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:netherite_marshmallow_stick#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/netherite_marshmallow_stick
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:incandescent_blade#inventory:
@@ -32,11 +39,12 @@ shadow realm
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/cooked_marshmallow_stick
 
 fix gooeyness
-fix marshmallow eating
+fix marshmallow stick eating
+make projectiles not/conditionally critical
 
 ancient plant tamable/boss stronger sniffer
 5 big booms
-ned kelly helmet rare creature
+ned kelly helmet rare creature bird
 
 experienced souler hat/curio
 

@@ -7,7 +7,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
@@ -26,6 +28,16 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
     public void tick(){
         super.tick();
         this.setNoGravity(true);
+        this.spawnParticles();
+    }
+    private void spawnParticles(){
+        for (int j = 0; j < 2; j++) {
+            this.getWorld()
+                    .addParticle(ParticleTypes.SOUL,
+                            this.getParticleX(0.5),
+                            this.getRandomBodyY(),
+                            this.getParticleZ(0.5),0,0,0 );
+        }
     }
 
     @Override
@@ -34,7 +46,7 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult){
         Entity owner = this.getOwner();
         Entity target = entityHitResult.getEntity();
-        if(owner instanceof LivingEntity shooter) {
+        if(owner instanceof LivingEntity) {
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
@@ -42,8 +54,12 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
             target.damage(damageSource, 10.0F);
             // Additional hit effects
         }
+        this.discard();
     }
-
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult){
+        this.discard();
+    }
     @Override
     protected ItemStack asItemStack() {
         return ItemStack.EMPTY;

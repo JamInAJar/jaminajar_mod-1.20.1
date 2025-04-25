@@ -19,10 +19,6 @@ public class HonkProjectileEntity extends PersistentProjectileEntity {
         super(ModEntities.HONK_PROJECTILE, world);
     }
 
-    @Override
-    protected void initDataTracker() {
-
-    }
     public void tick(){
         super.tick();
         this.setNoGravity(true);
@@ -34,8 +30,6 @@ public class HonkProjectileEntity extends PersistentProjectileEntity {
             entity.damage(this.getDamageSources().sonicBoom(this), 10.0F);
             if (entity2 instanceof LivingEntity) {
                 this.applyDamageEffects((LivingEntity)entity2, entity);
-
-
             }
         }
 }

@@ -16,7 +16,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-/// straight up now working rn will try to fix
+/// straight up not working rn will try to fix
 /// if any advice or fixes pls lmk
 public class CacophonyItem extends Item implements Vanishable {
     private static final int MAX_USE_TIME = 600;
@@ -42,11 +42,11 @@ public class CacophonyItem extends Item implements Vanishable {
         if (!world.isClient) {
             HonkProjectileEntity honkProjectileEntity = new HonkProjectileEntity(world, user);
             honkProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 10.0f, 0.2f);
-
+            honkProjectileEntity.setCritical(false);
+            world.spawnEntity(honkProjectileEntity);
             if (world instanceof ServerWorld serverWorld) {
-                serverWorld.spawnEntity(honkProjectileEntity); // Spawn once
 
-                // Add some particles for flair
+
                 Vec3d pos = honkProjectileEntity.getPos();
                 for (int i = 0; i < 8; i++) {
                     serverWorld.spawnParticles(ParticleTypes.SONIC_BOOM,
@@ -71,6 +71,7 @@ public class CacophonyItem extends Item implements Vanishable {
                     0.0F,
                     3.5F + (world.getRandom().nextFloat() - 0.5F),
                     2.0F + (world.getRandom().nextFloat() - 0.5F));
+            noteProjectileEntity.setCritical(false);
             world.spawnEntity(noteProjectileEntity);
 
             // Increment ticks used in NBT

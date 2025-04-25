@@ -32,9 +32,10 @@ public class SoulerItem extends Item {
         if(user.isSneaking()&&soulEnergyCount!=0){
             ChangeSoulEnergy(stack, 0);
             SoulerBeamProjectile soulerBeamProjectile = new SoulerBeamProjectile(ModEntities.SOULER_BEAM_PROJECTILE, world);
-            soulerBeamProjectile.setVelocity(user, user.getPitch(),user.getYaw(),0.0F,100f,0.001f);
+            soulerBeamProjectile.setVelocity(user, user.getPitch(),user.getYaw(),0.0F,10f,0.001f);
             soulerBeamProjectile.setOwner(user);
             soulerBeamProjectile.setNoGravity(true);
+            soulerBeamProjectile.setCritical(true);
             world.spawnEntity(soulerBeamProjectile);
 
         }else if(user.isSneaking()&&soulEnergyCount<=0){
@@ -45,6 +46,7 @@ public class SoulerItem extends Item {
                 soulerSoulProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 1.0F);
                 soulerSoulProjectile.setOwner(user);
                 soulerSoulProjectile.setNoGravity(true); // or false, depending on behavior
+                soulerSoulProjectile.setCritical(false);
                 world.spawnEntity(soulerSoulProjectile);
                 /// <ChangeSoulEnergy(stack, (int) (soulEnergyCount+1));> upon entity hit
             }
