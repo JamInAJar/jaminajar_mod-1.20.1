@@ -1,17 +1,20 @@
 shulker hammer
-link between souler and canister
-Helicopter Sword
+link between souler and canister - player NBT data
+Helicopter Sword>
 Split shield thingy
 
 Scissorblade???
 
 mr squeaky
 shadow realm
+Eat cake to go to shadow realm
+
+Implement curios api as an optional(recommended) dependency to work with hat of experiencedness and soul canister
 
 red panda
 unicorn?
-present -> altar
-ancient sniffer - either feed it an old plant or mixin the breeding thign for sniffers to drop an ANCIENT sniffer egg
+present> -> altar
+ancient sniffer> - either feed it an old plant or mixin the breeding thign for sniffers to drop an ANCIENT sniffer egg
 snuffer?
 morp
 
@@ -50,10 +53,9 @@ experienced souler hat/curio
 
 make or implement/fix sprites/models for:
 Soul canisters
-Souler
 Cacophony
 Gooed and Souled status effect icons
-Marshmallows&stick :)
+Marshmallow stick :)
 Solbrand pixel art
 helicopter sword
 
