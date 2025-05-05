@@ -41,7 +41,7 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
     }
 
     @Override
-    protected void initDataTracker() {}
+    protected void initDataTracker() {super.initDataTracker();}
 
     protected void onEntityHit(EntityHitResult entityHitResult){
         Entity owner = this.getOwner();

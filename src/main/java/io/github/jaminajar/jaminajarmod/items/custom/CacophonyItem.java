@@ -45,8 +45,6 @@ public class CacophonyItem extends Item implements Vanishable {
             honkProjectileEntity.setCritical(false);
             world.spawnEntity(honkProjectileEntity);
             if (world instanceof ServerWorld serverWorld) {
-
-
                 Vec3d pos = honkProjectileEntity.getPos();
                 for (int i = 0; i < 8; i++) {
                     serverWorld.spawnParticles(ParticleTypes.SONIC_BOOM,
@@ -75,17 +73,17 @@ public class CacophonyItem extends Item implements Vanishable {
             world.spawnEntity(noteProjectileEntity);
 
             // Increment ticks used in NBT
-            NbtCompound nbt = stack.getOrCreateNbt();
-            int ticksUsed = nbt.getInt(TICKS_USED_KEY);
-            nbt.putInt(TICKS_USED_KEY, ticksUsed + 1);
+            ///NbtCompound nbt = stack.getOrCreateNbt();
+            ///int ticksUsed = nbt.getInt(TICKS_USED_KEY);
+            ///nbt.putInt(TICKS_USED_KEY, ticksUsed + 1);
         }
     }
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (!world.isClient && user instanceof PlayerEntity player) {
-            int ticksUsed = stack.getOrCreateNbt().getInt(TICKS_USED_KEY);
-            int cooldown = Math.max(ticksUsed / 2, 20); // At least 1 second
+            ///int ticksUsed = stack.getOrCreateNbt().getInt(TICKS_USED_KEY);
+            int cooldown = Math.max(user.getItemUseTime() / 2, 20); // At least 1 second
             player.getItemCooldownManager().set(this, cooldown);
         }
     }

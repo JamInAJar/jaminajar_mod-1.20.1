@@ -14,21 +14,25 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
 public class NoteProjectileEntity extends PersistentProjectileEntity implements FlyingItemEntity {
-    public NoteProjectileEntity(EntityType type, World world){
-        super(type, world);
+    public NoteProjectileEntity(EntityType entityType, World world){
+        super(entityType, world);
     }
 
     public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world, LivingEntity owner) {
         super(entityType, world);
         this.setOwner(owner);
         this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0F, 3.5F + (world.getRandom().nextFloat() - 0.5F), 2.0F + (world.getRandom().nextFloat() - 0.5F));
     }
-    public NoteProjectileEntity(World world, LivingEntity owner){
-        super(ModEntities.NOTE_PROJECTILE, owner, world);
+    public NoteProjectileEntity(World world, LivingEntity owner) {
+        this(ModEntities.NOTE_PROJECTILE, world); // use correct constructor
+        this.setOwner(owner);
+        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0F, 3.5F + (world.getRandom().nextFloat() - 0.5F), 2.0F + (world.getRandom().nextFloat() - 0.5F));
     }
     @Override
     protected void initDataTracker() {
-
+        super.initDataTracker();
     }
 
     @Override

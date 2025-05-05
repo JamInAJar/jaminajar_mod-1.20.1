@@ -3,6 +3,7 @@ package io.github.jaminajar.jaminajarmod.items.custom;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import io.github.jaminajar.jaminajarmod.enchantment.BlastEnchantment;
+import io.github.jaminajar.jaminajarmod.enchantment.PentaboomEnchantment;
 import io.github.jaminajar.jaminajarmod.items.ModToolMaterials;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,7 +27,9 @@ import java.util.List;
 
 public class BoomtubeItem extends ToolItem {
     private final int maxGunpowder;
-    public int enchant = 0;
+    public int blastEnchant = 0;
+    public int pentaboomCount=0;
+    public int pentaboomEnable=0;
     public int explosionPower = 2;
     String gunpowderTooltipDisplay = "";
     private final float attackDamage;
@@ -68,7 +71,12 @@ public class BoomtubeItem extends ToolItem {
     public void setGunpowder(ItemStack stack, int storedGunpowder){
         stack.getOrCreateNbt().putInt("Gunpowder", MathHelper.clamp(storedGunpowder,0,maxGunpowder));
         gunpowderTooltipDisplay = "Gunpowder: " + storedGunpowder;
-
+    }
+    public void setPentaboomCounter(ItemStack stack, int pentaboomCounter){
+        stack.getOrCreateNbt().putInt("Pentaboom", pentaboomCounter+1);
+    }
+    public int getPentaboom(ItemStack stack){
+        return stack.getOrCreateNbt().getInt("Pentaboom");
     }
     public int getMaxGunpowder(){
         return maxGunpowder;
@@ -107,11 +115,19 @@ public class BoomtubeItem extends ToolItem {
         }
     }
 
-
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean superHit = super.postHit(stack,target,attacker);
-        enchant = EnchantmentHelper.getLevel(new BlastEnchantment(), stack);
-        explosionPower = 80*enchant+4;
+        blastEnchant = EnchantmentHelper.getLevel(new BlastEnchantment(), stack);
+        if(EnchantmentHelper.getLevel(new PentaboomEnchantment(),stack)==1){
+        pentaboomCount=getPentaboom(stack);}
+        setPentaboomCounter(stack,pentaboomCount);
+        if(pentaboomCount==5){
+            pentaboomEnable=5;
+            pentaboomCount=0;
+        }else{
+            pentaboomEnable=0;
+        }
+        explosionPower = 40*blastEnchant+4+50*pentaboomEnable;
         if (getGunpowder(stack)<=maxGunpowder && getGunpowder(stack)!=0){
             target.getWorld().createExplosion(target,
                     target.getX(),

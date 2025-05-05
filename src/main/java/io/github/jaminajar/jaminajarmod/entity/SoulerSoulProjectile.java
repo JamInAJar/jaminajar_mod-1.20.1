@@ -33,6 +33,7 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
 
     @Override
     protected void initDataTracker() {
+        super.initDataTracker();
     }
 
     @Override

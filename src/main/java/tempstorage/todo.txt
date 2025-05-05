@@ -18,6 +18,17 @@ ancient sniffer> - either feed it an old plant or mixin the breeding thign for s
 snuffer?
 morp
 
+bamboozler=bamboo machine gun, inventory, has pufferfish in recipe or smth to debuff
+dripstoner (Name Pending)= dripstone upgrade, probably not a machine gun
+<name> = potion upgrade????? maybe has brewing stand in recipe
+
+high amount of item in chest. item is fuel, tame material, smth for something else
+
+Nether<->Overworld switching item
+
+Limited durability unbreakable durability-regenning fast sword
+phantom foil
+
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:netherite_marshmallow_stick#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/netherite_marshmallow_stick
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:incandescent_blade#inventory:
@@ -43,7 +54,6 @@ morp
 
 fix gooeyness
 fix marshmallow stick eating
-make projectiles not/conditionally critical
 
 ancient plant tamable/boss stronger sniffer
 5 big booms

@@ -37,6 +37,7 @@ public class ModItems{
 	public static final Item BLADE_CORE = registerItem("blade_core",new Item(new Item.Settings()));
 	public static final Item HELI_BLADE = registerItem("helicopter_blade", new HelicopterBladeItem(ModToolMaterials.HELI_BLADE,0,-2.4f, new Item.Settings().fireproof()));
 	public static final Item CRIMSON_BLADE = registerItem("crimson_blade",new Item(new Item.Settings().fireproof()));
+	public static final Item PHANTOM_FOIL = registerItem("phantom_foil",new PhantomFoilItem(ModToolMaterials.PHANTOM_FOIL,0,-1f,new Item.Settings()));
 	private static Item registerItem(String name, Item item){
 		return Registry.register(Registries.ITEM, new Identifier(JamInAJarMod.MOD_ID, name), item);
 	}
@@ -47,6 +48,7 @@ public class ModItems{
 			entries.add(MACHETE);
 			entries.add(SCISSORS);
 			entries.add(BOOM_TUBE);
+			entries.add(PHANTOM_FOIL);
 		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
 			entries.add(COMFY_HANDLE);
