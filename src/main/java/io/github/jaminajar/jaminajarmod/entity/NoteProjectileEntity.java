@@ -21,10 +21,8 @@ public class NoteProjectileEntity extends PersistentProjectileEntity implements 
     }
     public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world) {
         super(entityType, world);
-        this.setOwner(owner);
-        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
-        this.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0F, 3.5F + (world.getRandom().nextFloat() - 0.5F), 2.0F + (world.getRandom().nextFloat() - 0.5F));
     }
+
 
     @Override
     protected void initDataTracker() {

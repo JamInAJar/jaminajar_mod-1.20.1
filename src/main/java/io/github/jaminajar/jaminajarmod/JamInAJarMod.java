@@ -15,8 +15,6 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static io.github.jaminajar.jaminajarmod.effects.ModEffects.GOOED;
-import static io.github.jaminajar.jaminajarmod.effects.ModEffects.SOULED;
 
 public class JamInAJarMod implements ModInitializer {
 	public static final String MOD_ID = "jaminajarmod";
