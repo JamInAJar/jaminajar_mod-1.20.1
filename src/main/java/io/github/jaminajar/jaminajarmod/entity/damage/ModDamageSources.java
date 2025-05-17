@@ -1,12 +1,9 @@
 package io.github.jaminajar.jaminajarmod.entity.damage;
 
-import io.github.jaminajar.jaminajarmod.entity.NoteProjectileEntity;
 import io.github.jaminajar.jaminajarmod.entity.SoulerSoulProjectile;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;

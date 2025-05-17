@@ -19,7 +19,7 @@ public class NoteProjectileEntity extends PersistentProjectileEntity implements 
         super.setOwner(owner);
         this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
-    public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world, LivingEntity owner) {
+    public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.setOwner(owner);
         this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());

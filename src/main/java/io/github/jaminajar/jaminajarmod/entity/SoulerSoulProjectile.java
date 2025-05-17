@@ -1,12 +1,10 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
 import io.github.jaminajar.jaminajarmod.effects.ModEffects;
-import io.github.jaminajar.jaminajarmod.effects.SouledEffect;
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;

@@ -64,7 +64,7 @@ public class CacophonyItem extends Item implements Vanishable {
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (!world.isClient()) {
-            NoteProjectileEntity noteProjectileEntity = new NoteProjectileEntity(world, user);
+            NoteProjectileEntity noteProjectileEntity = new NoteProjectileEntity(ModEntities.NOTE_PROJECTILE, world);
             noteProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.5F + (world.getRandom().nextFloat() - 0.5F), 2.0F + (world.getRandom().nextFloat() - 0.5F));
             noteProjectileEntity.setOwner(user);
             noteProjectileEntity.setNoGravity(true);
