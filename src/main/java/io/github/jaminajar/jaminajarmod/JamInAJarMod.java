@@ -1,5 +1,6 @@
 package io.github.jaminajar.jaminajarmod;
 
+import io.github.jaminajar.jaminajarmod.effects.ModEffects;
 import io.github.jaminajar.jaminajarmod.enchantment.BlastEnchantment;
 import io.github.jaminajar.jaminajarmod.enchantment.GooeynessEnchantment;
 import io.github.jaminajar.jaminajarmod.enchantment.SmartPitchEnchantment;
@@ -31,10 +32,8 @@ public class JamInAJarMod implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 		ModItems.registerModItems();
-
 		ModLootTableModifiers.modifyLootTables();
-		Registry.register(Registries.STATUS_EFFECT, new Identifier(JamInAJarMod.MOD_ID, "souled"), SOULED);
-		Registry.register(Registries.STATUS_EFFECT, new Identifier(JamInAJarMod.MOD_ID, "gooed"), GOOED);
+		ModEffects.registerEffects();
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"blast"),BLAST);
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"gooeyness"),GOOEYNESS);
 		Registry.register(Registries.ENCHANTMENT,new Identifier(MOD_ID,"smart_pitch"),SMART_PITCH);

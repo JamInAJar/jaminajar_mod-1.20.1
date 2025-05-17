@@ -32,7 +32,7 @@ public class ModEntities {
             new Identifier(JamInAJarMod.MOD_ID,"souler_soul_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC,SoulerSoulProjectile::new)
                     .dimensions(EntityDimensions
-                            .fixed(9f,4.5f))
+                            .fixed(9f,2.5f))
                     .trackRangeChunks(4)
                     .trackedUpdateRate(10)
                     .build());
@@ -40,7 +40,7 @@ public class ModEntities {
             new Identifier(JamInAJarMod.MOD_ID,"souler_beam_projectile"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC,SoulerBeamProjectile::new)
                     .dimensions(EntityDimensions
-                            .fixed(0.4f,0.4f))
+                            .fixed(0.01f,0.01f))
                     .trackRangeChunks(4)
                     .trackedUpdateRate(10)
                     .build());

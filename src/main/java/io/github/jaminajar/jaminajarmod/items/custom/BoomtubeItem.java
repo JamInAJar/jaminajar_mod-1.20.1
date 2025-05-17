@@ -81,6 +81,7 @@ public class BoomtubeItem extends ToolItem {
     public int getMaxGunpowder(){
         return maxGunpowder;
     }
+
     public boolean isItemBarVisible(ItemStack stack) {
         return getGunpowder(stack) > 0;
     }
@@ -127,7 +128,7 @@ public class BoomtubeItem extends ToolItem {
         }else{
             pentaboomEnable=0;
         }
-        explosionPower = 40*blastEnchant+4+50*pentaboomEnable;
+        explosionPower = 20*blastEnchant+4+25*pentaboomEnable;
         if (getGunpowder(stack)<=maxGunpowder && getGunpowder(stack)!=0){
             target.getWorld().createExplosion(target,
                     target.getX(),

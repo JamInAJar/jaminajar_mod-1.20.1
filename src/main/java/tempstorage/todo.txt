@@ -1,6 +1,9 @@
 shulker hammer
 link between souler and canister - player NBT data
-Helicopter Sword>
+souling with souler works but need canister to shoot
+
+Helicopter Sword spinny
+
 Split shield thingy
 
 Scissorblade???
@@ -24,10 +27,20 @@ dripstoner (Name Pending)= dripstone upgrade, probably not a machine gun
 
 high amount of item in chest. item is fuel, tame material, smth for something else
 
-Nether<->Overworld switching item
+Nether<->Overworld switching item?
 
 Limited durability unbreakable durability-regenning fast sword
 phantom foil
+
+offhands chestplate
+card
+wand
+
+particle
+
+tinkaton hammer
+
+crowbar that crows perch on
 
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:netherite_marshmallow_stick#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/netherite_marshmallow_stick

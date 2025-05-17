@@ -8,6 +8,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class HonkProjectileEntity extends PersistentProjectileEntity {
 
@@ -21,7 +22,7 @@ public class HonkProjectileEntity extends PersistentProjectileEntity {
 
     public void tick(){
         super.tick();
-        this.setNoGravity(true);
+        ///this.setNoGravity(true);
     }
     protected void onEntityHit(EntityHitResult entityHitResult){
         if (!this.getWorld().isClient()){
@@ -36,6 +37,6 @@ public class HonkProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected ItemStack asItemStack() {
-        return null;
+        return ItemStack.EMPTY;
     }
 }

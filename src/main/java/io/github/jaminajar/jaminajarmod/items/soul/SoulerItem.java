@@ -24,6 +24,21 @@ public class SoulerItem extends Item {
         stack.getOrCreateNbt().putInt("SoulEnergy", MathHelper.clamp(soulEnergyCount,0,maxSoulEnergyCount));
 
     }
+    /// ----------------------------------------------------------------------------------------------------------------
+    public boolean isItemBarVisible(ItemStack stack) {
+        return getSoulEnergyCount(stack) > 0;
+    }
+    @Override
+    public int getItemBarStep(ItemStack stack) {
+        int charge = getSoulEnergyCount(stack);
+        return MathHelper.ceil(charge * 13.0F / maxSoulEnergyCount);
+    }
+    @Override
+    public int getItemBarColor(ItemStack stack) {
+        int charge = getSoulEnergyCount(stack);
+        return charge == 0 ? 0x220000 : 0xFFFF00;
+    }
+    /// ----------------------------------------------------------------------------------------------------------------
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         user.setCurrentHand(hand);
@@ -32,7 +47,7 @@ public class SoulerItem extends Item {
         if(user.isSneaking()&&soulEnergyCount!=0){
             ChangeSoulEnergy(stack, 0);
             SoulerBeamProjectile soulerBeamProjectile = new SoulerBeamProjectile(ModEntities.SOULER_BEAM_PROJECTILE, world);
-            soulerBeamProjectile.setVelocity(user, user.getPitch(),user.getYaw(),0.0F,10f,0.001f);
+            soulerBeamProjectile.setVelocity(user, user.getPitch(),user.getYaw(),0.0F,8f,0.001f);
             soulerBeamProjectile.setOwner(user);
             soulerBeamProjectile.setNoGravity(true);
             soulerBeamProjectile.setCritical(true);

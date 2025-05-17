@@ -16,5 +16,7 @@
   "item.jaminajarmod.helicopter_blade": "Helicopter Blade",
   "item.jaminajarmod.marshmallow": "Marshmallow",
   "enchantment.jaminajarmod.blast": "Blast",
-  "tooltip.jaminajarmod.tooltip": "Fill with Gunpowder"
+  "tooltip.jaminajarmod.tooltip": "Fill with Gunpowder",
+  "death.attack.was_souled": "$%$s was souled",
+  "death.attack.was_lasered": "$%$s was shot"
 }

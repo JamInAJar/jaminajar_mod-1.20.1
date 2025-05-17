@@ -19,27 +19,28 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
     }
 
     public void setOwner(LivingEntity owner) {
-        super.setOwner(owner);  // This ensures the parent class's owner is set
-        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());  // Manually set position
+        super.setOwner(owner);
+        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
 
 
     @Override
     public void tick(){
         super.tick();
-        this.setNoGravity(true);
-        this.spawnParticles();
-    }
-    private void spawnParticles(){
-        for (int j = 0; j < 2; j++) {
-            this.getWorld()
-                    .addParticle(ParticleTypes.SOUL,
-                            this.getParticleX(0.5),
-                            this.getRandomBodyY(),
-                            this.getParticleZ(0.5),0,0,0 );
+        ///this.setNoGravity(true);
+        if (!this.getWorld().isClient) {
+            // physics or hit detection if needed
+        }
+
+        // Client-side: spawn particles
+        if (this.getWorld().isClient) {
+            this.getWorld().addParticle(
+                    ParticleTypes.SOUL,
+                    this.getX(), this.getY(), this.getZ(),
+                    0.0, 0.0, 0.0
+            );
         }
     }
-
     @Override
     protected void initDataTracker() {super.initDataTracker();}
 
@@ -50,7 +51,7 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(ModDamageTypes.SOULER_LASERED_DAMAGE));
+                            .entryOf(ModDamageTypes.SOULER_LASER));
             target.damage(damageSource, 10.0F);
             // Additional hit effects
         }

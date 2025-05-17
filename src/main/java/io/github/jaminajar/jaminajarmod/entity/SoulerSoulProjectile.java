@@ -6,13 +6,12 @@ import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -39,7 +38,7 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
     @Override
     public void tick() {
         super.tick();
-        this.setNoGravity(true);
+        ///this.setNoGravity(true);
     }
 
     public void takeSoulKnockback(double strength, double x, double y, double z) {
@@ -54,7 +53,7 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
         if (!this.getWorld().isClient()) {
             Entity target1 = entityHitResult.getEntity();
             Entity owner = this.getOwner();
-            SouledEffect souledEffect = new SouledEffect(StatusEffectCategory.HARMFUL, 2551850);
+
 
             int souledStrength = 0;
             if (target1 instanceof LivingEntity target) {
@@ -62,13 +61,12 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
                 if (souled != null) {
                     souledStrength = souled.getAmplifier() + 1;
                 }
+                World world=this.getWorld();
+                target1.damage(ModDamageTypes.of(world, ModDamageTypes.SOULER_SOUL), 2.0F);
             }
-            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(souledEffect, 30, 7 + souledStrength);
-            DamageSource damageSource = new DamageSource(
-                    getWorld().getRegistryManager()
-                            .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(ModDamageTypes.SOULER_SOULED_DAMAGE));
-            target1.damage(damageSource, 5.0F);
+            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModEffects.SOULED, 300, 7 + souledStrength);
+            ///DamageSource damageSource = new DamageSource(this.getDamageSources().soul);
+
             takeSoulKnockback(5, target1.getX(), target1.getY(), target1.getZ());
 
             if (owner instanceof LivingEntity shooter) {
@@ -80,7 +78,9 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
                     assert tag != null;
                     int soulEnergy = tag.getInt("SoulEnergy");
                     if (soulEnergy == 3) {
-                        owner.sendMessage(Text.literal("No Soul Energy!"));
+                        if(owner instanceof PlayerEntity){
+                            owner.sendMessage(Text.literal("No Soul Energy!"));
+                        }
                     } else {
                         tag.putInt("SoulEnergy", soulEnergy + 1);
                     }

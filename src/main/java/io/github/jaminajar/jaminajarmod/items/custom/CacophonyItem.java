@@ -1,7 +1,9 @@
 package io.github.jaminajar.jaminajarmod.items.custom;
 
 import io.github.jaminajar.jaminajarmod.entity.HonkProjectileEntity;
+import io.github.jaminajar.jaminajarmod.entity.ModEntities;
 import io.github.jaminajar.jaminajarmod.entity.NoteProjectileEntity;
+import io.github.jaminajar.jaminajarmod.entity.SoulerBeamProjectile;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -63,12 +65,9 @@ public class CacophonyItem extends Item implements Vanishable {
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (!world.isClient()) {
             NoteProjectileEntity noteProjectileEntity = new NoteProjectileEntity(world, user);
-            noteProjectileEntity.setVelocity(user,
-                    user.getPitch(),
-                    user.getYaw(),
-                    0.0F,
-                    3.5F + (world.getRandom().nextFloat() - 0.5F),
-                    2.0F + (world.getRandom().nextFloat() - 0.5F));
+            noteProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.5F + (world.getRandom().nextFloat() - 0.5F), 2.0F + (world.getRandom().nextFloat() - 0.5F));
+            noteProjectileEntity.setOwner(user);
+            noteProjectileEntity.setNoGravity(true);
             noteProjectileEntity.setCritical(false);
             world.spawnEntity(noteProjectileEntity);
 
@@ -83,7 +82,7 @@ public class CacophonyItem extends Item implements Vanishable {
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (!world.isClient && user instanceof PlayerEntity player) {
             ///int ticksUsed = stack.getOrCreateNbt().getInt(TICKS_USED_KEY);
-            int cooldown = Math.max(user.getItemUseTime() / 2, 20); // At least 1 second
+            int cooldown = Math.max(user.getItemUseTime(), 20);
             player.getItemCooldownManager().set(this, cooldown);
         }
     }

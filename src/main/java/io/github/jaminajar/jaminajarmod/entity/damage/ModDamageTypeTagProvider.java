@@ -17,6 +17,6 @@ public class ModDamageTypeTagProvider extends TagProvider<DamageType> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup lookup) {
         this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_INVULNERABILITY).add(ModDamageTypes.HELICOPTER_SWORD_SPIN).add(ModDamageTypes.NOTE_PROJECTILE).add(ModDamageTypes.UNATTRIBUTED_NOTE_PROJECTILE);
-        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.SOULER_LASERED_DAMAGE);
+        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.SOULER_LASER);
     }
 }

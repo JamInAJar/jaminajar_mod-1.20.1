@@ -1,5 +1,5 @@
 {
-  "exhaustion": 0.2,
+  "exhaustion": 1.0,
   "message_id": "was_souled",
   "scaling": "never"
 }

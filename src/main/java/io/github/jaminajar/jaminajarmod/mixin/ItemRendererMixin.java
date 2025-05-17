@@ -26,6 +26,9 @@ public abstract class ItemRendererMixin {
         if(stack.isOf(ModItems.SOULER)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"souler_3d","inventory"));
         }
+        if(stack.isOf(ModItems.PHANTOM_FOIL)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"phantom_foil_3d","inventory"));
+        }
         return value;
     }
 }
