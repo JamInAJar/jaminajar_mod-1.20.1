@@ -12,14 +12,15 @@ import net.minecraft.world.World;
 
 
 public class ModEntities {
-    public static final EntityType<NoteProjectileEntity> NOTE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType<NoteProjectileEntity> NOTE_PROJECTILE = Registry.register(
+            Registries.ENTITY_TYPE,
             new Identifier(JamInAJarMod.MOD_ID, "note_projectile"),
             FabricEntityTypeBuilder.<NoteProjectileEntity>create(SpawnGroup.MISC, NoteProjectileEntity::new)
-                    .dimensions(EntityDimensions
-                            .fixed(0.5f,0.5f))
-                    .trackRangeChunks(4)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                    .trackRangeBlocks(64)
                     .trackedUpdateRate(10)
-                    .build());
+                    .build()
+    );
     public static final EntityType<HonkProjectileEntity> HONK_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(JamInAJarMod.MOD_ID,"honk_projectile"),
             FabricEntityTypeBuilder.<HonkProjectileEntity>create(SpawnGroup.MISC,HonkProjectileEntity::new)

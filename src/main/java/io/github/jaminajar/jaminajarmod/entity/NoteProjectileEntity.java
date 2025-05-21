@@ -1,19 +1,21 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
+import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
-public class NoteProjectileEntity extends PersistentProjectileEntity implements FlyingItemEntity {
+public class NoteProjectileEntity extends PersistentProjectileEntity {
 
     public void setOwner(LivingEntity owner) {
         super.setOwner(owner);
@@ -30,27 +32,39 @@ public class NoteProjectileEntity extends PersistentProjectileEntity implements 
     }
 
     @Override
-    public Packet<ClientPlayPacketListener> createSpawnPacket(){
-        return new EntitySpawnS2CPacket(this);
-    }
-    public void tick(){
-        ///this.setNoGravity(true);
+    public void tick() {
+        super.tick();
+        if (this.getWorld().isClient) {
+            this.getWorld().addParticle(
+                    ParticleTypes.NOTE,
+                    this.getX(), this.getY(), this.getZ(),
+                    0.0, 0.0, 0.0
+            );
+        }
     }
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult){
         if (!this.getWorld().isClient()){
             Entity target = entityHitResult.getEntity();
             Entity owner = this.getOwner();
-            target.damage(this.getDamageSources().sonicBoom(this), 0.5F);
+            DamageSource damageSource = new DamageSource(
+                    getWorld().getRegistryManager()
+                            .get(RegistryKeys.DAMAGE_TYPE)
+                            .entryOf(ModDamageTypes.NOTE_PROJECTILE));
+            target.damage(damageSource, 0.5F);
             if (target instanceof LivingEntity) {
                 this.applyDamageEffects((LivingEntity)owner, target);
             }
-
+            this.discard();
         }
+
     }
 
     protected void onCollision(HitResult hitResult){
         super.onCollision(hitResult);
+    }
+    protected void onBlockHit(BlockHitResult blockHitResult){
+        this.discard();
     }
 
     @Override
@@ -58,8 +72,4 @@ public class NoteProjectileEntity extends PersistentProjectileEntity implements 
         return ItemStack.EMPTY;
     }
 
-    @Override
-    public ItemStack getStack() {
-        return ItemStack.EMPTY;
-    }
 }

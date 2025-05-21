@@ -5,6 +5,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -12,6 +14,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
+
 
 public class SoulerBeamProjectile extends PersistentProjectileEntity {
     public SoulerBeamProjectile(EntityType<? extends SoulerBeamProjectile> entityType, World world) {
@@ -29,10 +32,8 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
         super.tick();
         ///this.setNoGravity(true);
         if (!this.getWorld().isClient) {
-            // physics or hit detection if needed
         }
 
-        // Client-side: spawn particles
         if (this.getWorld().isClient) {
             this.getWorld().addParticle(
                     ParticleTypes.SOUL,
@@ -47,12 +48,16 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult){
         Entity owner = this.getOwner();
         Entity target = entityHitResult.getEntity();
+        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.NAUSEA, 40, 7);
         if(owner instanceof LivingEntity) {
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
                             .entryOf(ModDamageTypes.SOULER_LASER));
             target.damage(damageSource, 10.0F);
+            assert target instanceof LivingEntity;
+            ((LivingEntity) target).addStatusEffect(statusEffectInstance);
+
             // Additional hit effects
         }
         this.discard();
