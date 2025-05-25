@@ -13,30 +13,25 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 
-public class BoomtubeItem extends ToolItem {
-    private final int maxGunpowder;
+public class BoomtubeItem extends AmmoItem {
+    private final int maxAmmo;
     public int blastEnchant = 0;
     public int pentaboomCount=0;
     public int pentaboomEnable=0;
     public int explosionPower = 2;
-    String gunpowderTooltipDisplay = "";
     private final float attackDamage;
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public BoomtubeItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings, int maxGunpowder) {
-        super(toolMaterial, settings);
+    public BoomtubeItem(ModToolMaterials toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings, int maxAmmo) {
+        super(settings, Items.GUNPOWDER, 32);
         this.attackDamage = attackDamage + toolMaterial.getAttackDamage();
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,
@@ -44,83 +39,29 @@ public class BoomtubeItem extends ToolItem {
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID,
                 "Weapon modifier", attackSpeed, EntityAttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
-        this.maxGunpowder = maxGunpowder;
+        this.maxAmmo = maxAmmo;
     }
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
         return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
     }
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
-        if (user.isSneaking()) {
-            stack = user.getStackInHand(hand);
-            int currentGunpowder = getGunpowder(stack);
-            if (currentGunpowder < maxGunpowder && playerHasItem(user, Items.GUNPOWDER)) {
-                setGunpowder(stack, currentGunpowder + 1);
-                reduceItem(user, Items.GUNPOWDER, 1);
-                return TypedActionResult.success(stack);
-            }
-            return TypedActionResult.pass(stack);
-        }
-        return TypedActionResult.fail(stack);
-    }
 
-    public int getGunpowder(ItemStack stack){
-        return stack.getOrCreateNbt().getInt("Gunpowder");
-    }
-    public void setGunpowder(ItemStack stack, int storedGunpowder){
-        stack.getOrCreateNbt().putInt("Gunpowder", MathHelper.clamp(storedGunpowder,0,maxGunpowder));
-        gunpowderTooltipDisplay = "Gunpowder: " + storedGunpowder;
-    }
     public void setPentaboomCounter(ItemStack stack, int pentaboomCounter){
         stack.getOrCreateNbt().putInt("Pentaboom", pentaboomCounter+1);
     }
     public int getPentaboom(ItemStack stack){
         return stack.getOrCreateNbt().getInt("Pentaboom");
     }
-    public int getMaxGunpowder(){
-        return maxGunpowder;
+    public int getMaxAmmo(){
+        return maxAmmo;
     }
 
-    public boolean isItemBarVisible(ItemStack stack) {
-        return getGunpowder(stack) > 0;
-    }
-    @Override
-    public int getItemBarStep(ItemStack stack) {
-        int charge = getGunpowder(stack);
-        return MathHelper.ceil(charge * 13.0F / maxGunpowder);
-    }
-    @Override
-    public int getItemBarColor(ItemStack stack) {
-        int charge = getGunpowder(stack);
-        return charge == 0 ? 0x220000 : 0xFFFF00;
-    }
-
-    public static boolean playerHasItem(PlayerEntity player, Item itemToCheck) {
-        for (ItemStack stack : player.getInventory().main) {
-            if (stack.getItem() == itemToCheck) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public static void reduceItem(PlayerEntity player, Item itemToReduce, int amount) {
-        for (ItemStack stack : player.getInventory().main) {
-            if (stack.getItem() == itemToReduce) {
-                int currentCount = stack.getCount();
-                if (currentCount >= amount) {
-                    stack.decrement(amount);
-                }
-                return;
-            }
-        }
-    }
 
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         boolean superHit = super.postHit(stack,target,attacker);
         blastEnchant = EnchantmentHelper.getLevel(new BlastEnchantment(), stack);
         if(EnchantmentHelper.getLevel(new PentaboomEnchantment(),stack)==1){
-        pentaboomCount=getPentaboom(stack);}
+            pentaboomCount=getPentaboom(stack);}
         setPentaboomCounter(stack,pentaboomCount);
         if(pentaboomCount==5){
             pentaboomEnable=5;
@@ -129,7 +70,7 @@ public class BoomtubeItem extends ToolItem {
             pentaboomEnable=0;
         }
         explosionPower = 20*blastEnchant+4+25*pentaboomEnable;
-        if (getGunpowder(stack)<=maxGunpowder && getGunpowder(stack)!=0){
+        if (getAmmo(stack)<= maxAmmo && getAmmo(stack)!=0){
             target.getWorld().createExplosion(target,
                     target.getX(),
                     target.getY(),
@@ -137,7 +78,7 @@ public class BoomtubeItem extends ToolItem {
                     explosionPower,
                     false,
                     World.ExplosionSourceType.MOB);
-            setGunpowder(stack,getGunpowder(stack)-1);
+            setAmmo(stack,getAmmo(stack)-1);
             return superHit;
         }
         return false;

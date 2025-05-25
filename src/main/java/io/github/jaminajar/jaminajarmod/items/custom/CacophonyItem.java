@@ -13,8 +13,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
-/// straight up not working rn will try to fix
-/// if any advice or fixes pls lmk
+
 public class CacophonyItem extends Item implements Vanishable {
     private static final int MAX_USE_TIME = 600;
 

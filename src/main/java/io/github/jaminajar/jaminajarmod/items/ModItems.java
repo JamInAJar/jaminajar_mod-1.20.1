@@ -22,9 +22,9 @@ public class ModItems{
 	public static final Item RAVAGER_TOOTH = registerItem("ravager_tooth", new Item(new Item.Settings()));
 	public static final Item RAVAGER_SCREW = registerItem("ravager_screw", new Item(new Item.Settings()));
 	public static final Item SOLBRAND = registerItem("solbrand", new SolbrandItem(ModToolMaterials.SOLBRAND, 10, -2.6f, new Item.Settings().fireproof()));
-	public static final Item BOOM_TUBE = registerItem("boom_tube", new BoomtubeItem(ModToolMaterials.BOOM_TUBE,5, -2.6f,new Item.Settings(),32));
+	public static final Item BOOM_TUBE = registerItem("boom_tube", new BoomtubeItem(ModToolMaterials.BOOM_TUBE,5, -2.6f,new Item.Settings().maxCount(1),32));
 	public static final Item CACOPHONY = registerItem("cacophony",new CacophonyItem(new Item.Settings().maxCount(1)));
-	public static final Item BIOSPEAKER = registerItem("biospeaker", new Item(new Item.Settings()));
+	public static final Item BIOSPEAKER = registerItem("biospeaker", new Item(new Item.Settings().maxCount(1)));
 	public static final Item NOTE_PROJECTILE = registerItem("note_projectile",new Item(new Item.Settings()));
 	public static final Item MARSHMALLOW = registerItem("marshmallow",new Item(new Item.Settings().food(ModFoods.MARSHMALLOW)));
 	public static final Item COOKED_MARSHMALLOW = registerItem("cooked_marshmallow",new Item(new Item.Settings().food(ModFoods.COOKED_MARSHMALLOW)));
@@ -38,6 +38,8 @@ public class ModItems{
 	public static final Item HELI_BLADE = registerItem("helicopter_blade", new HelicopterBladeItem(ModToolMaterials.HELI_BLADE,0,-2.4f, new Item.Settings().fireproof()));
 	public static final Item CRIMSON_BLADE = registerItem("crimson_blade",new Item(new Item.Settings().fireproof()));
 	public static final Item PHANTOM_FOIL = registerItem("phantom_foil",new PhantomFoilItem(ModToolMaterials.PHANTOM_FOIL,0,-1f,new Item.Settings()));
+	public static final Item BAMBOOZLER = registerItem("bamboozler",new BamboozlerItem(new Item.Settings().maxCount(1)));
+	public static final Item DRIPSTONER = registerItem("dripstoner",new DripstonerItem(new Item.Settings().maxCount(1)));
 	private static Item registerItem(String name, Item item){
 		return Registry.register(Registries.ITEM, new Identifier(JamInAJarMod.MOD_ID, name), item);
 	}

@@ -69,8 +69,9 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
 
             if (owner instanceof LivingEntity shooter) {
                 ItemStack heldItem = shooter.getMainHandStack();
-                assert target1 instanceof LivingEntity;
-                ((LivingEntity) target1).addStatusEffect(statusEffectInstance);
+                if(target1 instanceof LivingEntity){
+                    ((LivingEntity) target1).addStatusEffect(statusEffectInstance);
+                }
                 if (heldItem.hasNbt()) {
                     NbtCompound tag = heldItem.getNbt();
                     assert tag != null;

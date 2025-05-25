@@ -1,11 +1,14 @@
 shulker hammer
+
 link between souler and canister - player NBT data
 souling with souler works but need canister to shoot
+zoom with hat
 
 Helicopter Sword spinny
 
 Split shield thingy
-crowbar
+
+crowbar that crows perch on
 crow bar crow bar crow's crowbar
 
 Scissorblade???
@@ -14,7 +17,7 @@ mr squeaky
 shadow realm
 Eat cake to go to shadow realm
 
-Implement curios api as an optional(recommended) dependency to work with hat of experiencedness and soul canister
+Implement curios api/trinkets api as an optional(recommended) dependency to work with hat of experiencedness and soul canister
 
 red panda
 unicorn?
@@ -23,16 +26,14 @@ ancient sniffer> - either feed it an old plant or mixin the breeding thign for s
 snuffer?
 morp
 
-bamboozler=bamboo machine gun, inventory, has pufferfish in recipe or smth to debuff
-dripstoner (Name Pending)= dripstone upgrade, probably not a machine gun
+bamboozler and dripstoner fire sound and fire rate
 <name> = potion upgrade????? maybe has brewing stand in recipe
 
 high amount of item in chest. item is fuel, tame material, smth for something else
 
 Nether<->Overworld switching item?
 
-Limited durability unbreakable durability-regenning fast sword
-phantom foil
+Limited durability unbreakable durability-regenning fast phantom foil
 
 offhands chestplate
 card
@@ -42,7 +43,7 @@ particle
 
 tinkaton hammer
 
-crowbar that crows perch on
+
 
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:netherite_marshmallow_stick#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/netherite_marshmallow_stick

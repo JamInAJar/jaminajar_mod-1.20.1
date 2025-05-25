@@ -1,5 +1,6 @@
 package io.github.jaminajar.jaminajarmod.client;
 
+import io.github.jaminajar.jaminajarmod.items.custom.AmmoItem;
 import io.github.jaminajar.jaminajarmod.items.custom.BoomtubeItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -10,10 +11,10 @@ import net.minecraft.util.Identifier;
 public class CustomItemRenderer {
     private static final Identifier CHARGED_BAR_TEXTURE = new Identifier("jaminajar","textures/gui/charged_bar.png");
     public static void renderChargeBar(ItemStack stack, MatrixStack matrices, int x, int y){
-        if (stack.getItem()instanceof BoomtubeItem){
+        if (stack.getItem()instanceof AmmoItem){
             BoomtubeItem item = (BoomtubeItem) stack.getItem();
-            int charge = item.getGunpowder(stack);
-            int maxCharge=item.getMaxGunpowder();
+            int charge = item.getAmmo(stack);
+            int maxCharge=item.getMaxAmmo();
 
             MinecraftClient.getInstance().getTextureManager().bindTexture(CHARGED_BAR_TEXTURE);
             drawTexturedBar(matrices,x,y,0,0,100,5);

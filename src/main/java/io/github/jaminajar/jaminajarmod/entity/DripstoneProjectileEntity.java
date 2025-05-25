@@ -1,10 +1,13 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
+import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageSources;
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -16,54 +19,36 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
 
-public class SoulerBeamProjectile extends PersistentProjectileEntity {
-    public SoulerBeamProjectile(EntityType<? extends SoulerBeamProjectile> entityType, World world) {
-        super(entityType, world);
-    }
+public class DripstoneProjectileEntity extends PersistentProjectileEntity {
+
 
     public void setOwner(LivingEntity owner) {
         super.setOwner(owner);
         this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
+    public DripstoneProjectileEntity(EntityType<? extends DripstoneProjectileEntity> type, World world, LivingEntity owner) {
+        super(type, world);
+        this.setOwner(owner);
+        this.setVelocity(owner, owner.getPitch(),owner.getYaw(),0.0F,2.0f,0.7f);
+    }
+    public DripstoneProjectileEntity(EntityType<? extends DripstoneProjectileEntity> type, World world) {
+        super(type, world);
+    }
 
 
-    @Override
     public void tick(){
         super.tick();
-        ///this.setNoGravity(true);
-        if (!this.getWorld().isClient) {
-        }
-
-        if (this.getWorld().isClient) {
-            this.getWorld().addParticle(
-                    ParticleTypes.SOUL,
-                    this.getX(), this.getY(), this.getZ(),
-                    0.0, 0.0, 0.0
-            );
-        }
     }
-    @Override
-    protected void initDataTracker() {super.initDataTracker();}
-
     protected void onEntityHit(EntityHitResult entityHitResult){
-        Entity owner = this.getOwner();
-        Entity target = entityHitResult.getEntity();
-        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.NAUSEA, 40, 7);
-        if(owner instanceof LivingEntity) {
+        if (!this.getWorld().isClient()){
+            Entity entity = entityHitResult.getEntity();
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(ModDamageTypes.SOULER_LASER));
-            target.damage(damageSource, 10.0F);
-            if(target instanceof LivingEntity){
-                ((LivingEntity) target).addStatusEffect(statusEffectInstance);
-            }
-
-            // Additional hit effects
+                            .entryOf(DamageTypes.FALLING_STALACTITE));
+            entity.damage(damageSource, 12.0F);
         }
-        this.discard();
     }
-    @Override
     protected void onBlockHit(BlockHitResult blockHitResult){
         this.discard();
     }

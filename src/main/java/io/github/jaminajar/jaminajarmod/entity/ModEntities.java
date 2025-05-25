@@ -53,6 +53,22 @@ public class ModEntities {
                     .trackRangeChunks(4)
                     .trackedUpdateRate(10)
                     .build());
+    public static final EntityType<BambooProjectileEntity> BAMBOO_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(JamInAJarMod.MOD_ID,"bamboo_projectile"),
+            FabricEntityTypeBuilder.<BambooProjectileEntity>create(SpawnGroup.MISC,BambooProjectileEntity::new)
+                    .dimensions(EntityDimensions
+                            .fixed(1.0f,1.0f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build());
+    public static final EntityType<DripstoneProjectileEntity> DRIPSTONE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(JamInAJarMod.MOD_ID,"dripstone_projectile"),
+            FabricEntityTypeBuilder.<DripstoneProjectileEntity>create(SpawnGroup.MISC,DripstoneProjectileEntity::new)
+                    .dimensions(EntityDimensions
+                            .fixed(1.7f,1.7f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build());
     private World world;
 
 
