@@ -1,18 +1,14 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
-import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageSources;
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
+import io.github.jaminajar.jaminajarmod.util.CombatUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -38,15 +34,22 @@ public class DripstoneProjectileEntity extends PersistentProjectileEntity {
 
     public void tick(){
         super.tick();
+        if (this.age>200){
+            this.discard();}
     }
     protected void onEntityHit(EntityHitResult entityHitResult){
         if (!this.getWorld().isClient()){
             Entity entity = entityHitResult.getEntity();
+            Entity owner = this.getOwner();
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(DamageTypes.FALLING_STALACTITE));
-            entity.damage(damageSource, 12.0F);
+                            .entryOf(ModDamageTypes.DRIPSTONE_PROJECTILE),owner);
+            if(entity instanceof LivingEntity livingTarget){
+                CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,25.0f);
+            } else {
+                entity.damage(damageSource,25.0f);
+            }
         }
     }
     protected void onBlockHit(BlockHitResult blockHitResult){

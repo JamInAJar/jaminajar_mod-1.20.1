@@ -53,12 +53,18 @@ public class PhantomFoilItem extends SwordItem {
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if(stack.getDamage() == 9) {
-            return false;
 
-            //cooldown dmg regen stuff
+        if (attacker instanceof PlayerEntity player){
+            if (player.getItemCooldownManager().isCoolingDown(this)) {
+                return false; // block swing during cooldown
+            }
+            stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+            if(stack.getDamage() >= 9) {
+                player.getItemCooldownManager().set(this,100);
+                stack.setDamage(0);
+            }
         }
-        stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
+
         return true;
     }
 

@@ -12,7 +12,10 @@ public interface ModDamageTypes {
     RegistryKey<DamageType> SOULER_LASER = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "lasered"));
     RegistryKey<DamageType> UNATTRIBUTED_NOTE_PROJECTILE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("unattributed_note_projectile"));
     RegistryKey<DamageType> NOTE_PROJECTILE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod","note_projectile_damage"));
-    RegistryKey<DamageType> HELICOPTER_SWORD_SPIN = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("heli_sword_spin"));
+    RegistryKey<DamageType> HELICOPTER_SWORD_SPIN = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod","heli_sword_spin"));
+    RegistryKey<DamageType> CACOPHONY_OVERBLOW= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "cacophony_overblow"));
+    RegistryKey<DamageType> BAMBOO_PROJECTILE= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "falling_bamboo"));
+    RegistryKey<DamageType> DRIPSTONE_PROJECTILE= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "falling_dripstone"));
    // static void bootstrap(Registerable<DamageType> damageTypeRegisterable){
     //}
    public static DamageSource of(World world, RegistryKey<DamageType> key) {

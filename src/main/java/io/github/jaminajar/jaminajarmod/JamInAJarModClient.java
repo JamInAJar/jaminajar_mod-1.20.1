@@ -3,7 +3,10 @@ package io.github.jaminajar.jaminajarmod;
 import io.github.jaminajar.jaminajarmod.client.HudRenderHandler;
 import io.github.jaminajar.jaminajarmod.entity.ModEntities;
 import io.github.jaminajar.jaminajarmod.entity.renderer.*;
+import io.github.jaminajar.jaminajarmod.items.ModItems;
+import io.github.jaminajar.jaminajarmod.util.CacophonyItemRenderer;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -28,5 +31,8 @@ public class JamInAJarModClient implements ClientModInitializer {
                 ModModelLayers.BAMBOO_PROJECTILE,
                 BambooProjectileModel::getTexturedModelData
         );
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.CACOPHONY, new CacophonyItemRenderer());
+
     }
 }
+

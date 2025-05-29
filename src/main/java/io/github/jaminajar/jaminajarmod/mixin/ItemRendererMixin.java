@@ -26,11 +26,14 @@ public abstract class ItemRendererMixin {
         if(stack.isOf(ModItems.SOULER)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"souler_3d","inventory"));
         }
-        if(stack.isOf(ModItems.PHANTOM_FOIL)){
-            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"phantom_foil_3d","inventory"));
-        }
         if(stack.isOf(ModItems.BAMBOOZLER)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"bamboozler_3d","inventory"));
+        }
+        if(stack.isOf(ModItems.DRIPSTONER)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"dripstoner","inventory"));
+        }
+        if(stack.isOf(ModItems.CACOPHONY)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"cacophony_3d","inventory"));
         }
         return value;
     }

@@ -58,7 +58,6 @@ public class AmmoItem extends Item {
                 count += stack.getCount();
             }
         }
-
         return count;
     }
     public static void reduceItem(PlayerEntity player, Item itemToReduce, int amount) {

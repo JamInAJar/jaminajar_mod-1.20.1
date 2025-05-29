@@ -24,10 +24,8 @@ public class BambooProjectileRenderer extends EntityRenderer<BambooProjectileEnt
     public void render(BambooProjectileEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
 
-        // Move and rotate to match entity orientation
-        matrices.translate(0.0F, 1.5F, 0.0F);
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entity.getYaw()));
-        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getPitch()));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(entity.getPitch()-90));
 
         // Get model texture
         Identifier texture = this.getTexture(entity);

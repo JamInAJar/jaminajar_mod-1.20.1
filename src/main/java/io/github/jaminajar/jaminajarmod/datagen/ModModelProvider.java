@@ -43,5 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.COOKED_MARSHMALLOW_STICK,Models.GENERATED);
         itemModelGenerator.register(ModItems.NETHERITE_MARSHMALLOW_STICK,Models.GENERATED);
         itemModelGenerator.register(ModItems.COOKED_NETHERITE_MARSHMALLOW_STICK,Models.GENERATED);
+        itemModelGenerator.register(ModItems.DRIPSTONER_UPGRADE_TEMPLATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.EMPTY_SOUL_CANISTER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FULL_SOUL_CANISTER, Models.GENERATED);
     }
 }

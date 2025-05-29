@@ -10,6 +10,8 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import java.util.Objects;
 import java.util.UUID;
 
+import static java.lang.Math.log;
+
 public class GooedEffect extends StatusEffect {
     public static final UUID GOOED_SPEED_MODIFIER_UUID = UUID.fromString("d5f94b04-fb26-42ea-98bc-c114eabc3c98");
 
@@ -21,11 +23,11 @@ public class GooedEffect extends StatusEffect {
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onApplied(entity, attributes, amplifier);
 
-        int gooedCoeff = amplifier + 1;
+        int gooedCoeff = (int) (4*(log(amplifier + 1))+1);
         EntityAttributeModifier speedModifier = new EntityAttributeModifier(
                 GOOED_SPEED_MODIFIER_UUID,
                 "gooedSpeed",
-                -0.2f * gooedCoeff,
+                -0.4f * gooedCoeff,
                 EntityAttributeModifier.Operation.MULTIPLY_TOTAL
         );
 

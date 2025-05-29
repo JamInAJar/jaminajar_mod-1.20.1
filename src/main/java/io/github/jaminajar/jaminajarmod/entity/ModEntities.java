@@ -57,7 +57,7 @@ public class ModEntities {
             new Identifier(JamInAJarMod.MOD_ID,"bamboo_projectile"),
             FabricEntityTypeBuilder.<BambooProjectileEntity>create(SpawnGroup.MISC,BambooProjectileEntity::new)
                     .dimensions(EntityDimensions
-                            .fixed(1.0f,1.0f))
+                            .fixed(0.1f,0.1f))
                     .trackRangeChunks(4)
                     .trackedUpdateRate(10)
                     .build());

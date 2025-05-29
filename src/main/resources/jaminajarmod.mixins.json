@@ -9,7 +9,8 @@
   "client": [
     "ItemRendererAccessor",
     "ItemRendererMixin",
-    "ModelLoaderMixin"
+    "ModelLoaderMixin",
+    "PlayerEntityRendererMixin"
 
   ],
   "injectors": {

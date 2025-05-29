@@ -1,8 +1,9 @@
-shulker hammer
-
 link between souler and canister - player NBT data
 souling with souler works but need canister to shoot
 zoom with hat
+
+SFX
+
 
 Helicopter Sword spinny
 
@@ -26,7 +27,7 @@ ancient sniffer> - either feed it an old plant or mixin the breeding thign for s
 snuffer?
 morp
 
-bamboozler and dripstoner fire sound and fire rate
+bamboozler and dripstoner fire sound
 <name> = potion upgrade????? maybe has brewing stand in recipe
 
 high amount of item in chest. item is fuel, tame material, smth for something else
@@ -44,9 +45,6 @@ particle
 tinkaton hammer
 
 
-
-[10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:netherite_marshmallow_stick#inventory:
-    minecraft:textures/atlas/blocks.png:jaminajarmod:item/netherite_marshmallow_stick
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:incandescent_blade#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/incandescent_blade
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:ravager_tooth#inventory:
@@ -61,15 +59,9 @@ tinkaton hammer
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/crimson_blade
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:blade_core#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/blade_core
-[10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:cooked_netherite_marshmallow_stick#inventory:
-    minecraft:textures/atlas/blocks.png:jaminajarmod:item/cooked_netherite_marshmallow_stick
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:biospeaker#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/biospeaker
-[10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:cooked_marshmallow_stick#inventory:
-    minecraft:textures/atlas/blocks.png:jaminajarmod:item/cooked_marshmallow_stick
 
-fix gooeyness
-fix marshmallow stick eating
 
 ancient plant tamable/boss stronger sniffer
 5 big booms
@@ -79,12 +71,16 @@ experienced souler hat/curio
 
 make or implement/fix sprites/models for:
 Soul canisters
-Cacophony
 Gooed and Souled status effect icons
-Marshmallow stick :)
 Solbrand pixel art
 helicopter sword
 
 
 ,
 		"DaFuqs: Code from Spectrum for Scissorblades"
+bamboozler to dripstoner upgrade - in mineshaft chest?
+soul crystal worldgen
+lang
+update to 1.21.1???
+crossbow enchant that allows you to load boomtubes
+Upon finished durability, marshmallowstick becomes <material>sword

@@ -8,16 +8,20 @@ import net.minecraft.item.ItemStack;
 
 
 public class GooeynessEnchantment extends Enchantment {
-    public GooeynessEnchantment() {
+    public GooeynessEnchantment(Enchantment.Rarity rarity, EquipmentSlot... equipmentSlots) {
         super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
     @Override
     public int getMinPower(int level){
-        return 20;
+        return 20 + (level -1)*10;
     }
     @Override
     public boolean isAcceptableItem(ItemStack stack){
-        return stack.getItem() instanceof MarshmallowStickItem ? true : super.isAcceptableItem(stack);
+        return stack.getItem() instanceof MarshmallowStickItem || super.isAcceptableItem(stack);
+    }
+    @Override
+    public int getMaxPower(int level){
+        return this.getMinPower(level)+30;
     }
     @Override
     public int getMaxLevel(){

@@ -11,6 +11,7 @@ public class ModFoods {
                     .snack()
                     .statusEffect(new StatusEffectInstance(SPEED,400),1f)
                     .statusEffect(new StatusEffectInstance(ABSORPTION,200,1),1f)
+                    .alwaysEdible()
                     .build();
     public static final FoodComponent COOKED_MARSHMALLOW =
             new FoodComponent.Builder()
@@ -18,6 +19,8 @@ public class ModFoods {
                     .saturationModifier(8)
                     .snack()
                     .statusEffect(new StatusEffectInstance(FIRE_RESISTANCE,1000),1f)
-                    .statusEffect(new StatusEffectInstance(ABSORPTION,150,3),1f)
+                    .statusEffect(new StatusEffectInstance(ABSORPTION,400,2),1f)
+                    .statusEffect(new StatusEffectInstance(REGENERATION,40,3),1f)
+                    .alwaysEdible()
                     .build();
 }

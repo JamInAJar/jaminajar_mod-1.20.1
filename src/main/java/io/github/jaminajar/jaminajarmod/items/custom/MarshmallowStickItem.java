@@ -3,21 +3,22 @@ package io.github.jaminajar.jaminajarmod.items.custom;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
-import io.github.jaminajar.jaminajarmod.effects.GooedEffect;
-import io.github.jaminajar.jaminajarmod.enchantment.GooeynessEnchantment;
+import io.github.jaminajar.jaminajarmod.effects.ModEffects;
+import io.github.jaminajar.jaminajarmod.enchantment.ModEnchantments;
 import io.github.jaminajar.jaminajarmod.items.ModToolMaterials;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -64,18 +65,27 @@ public class MarshmallowStickItem extends ToolItem {
                 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F
         );
         this.applyFoodEffects(stack, world, user);
-        if (!(user instanceof PlayerEntity) || !((PlayerEntity)user).getAbilities().creativeMode) {
-            stack.damage(250*(3+yesCooked-yesNetherite),
+        int amount = 250 * (3 + yesCooked - yesNetherite)/(EnchantmentHelper.getLevel(Enchantments.UNBREAKING,stack)/2+1);
+        if (!(user instanceof PlayerEntity) || !((PlayerEntity) user).getAbilities().creativeMode) {
+            if (amount >= stack.getMaxDamage()-stack.getDamage()) {
+                if(yesNetherite==0){
+                    return new ItemStack(Items.WOODEN_SWORD);
+                } else if(yesNetherite==1){
+                    return new ItemStack(Items.NETHERITE_SWORD);
+                }
+
+            }
+            stack.damage(amount,
                     user,
                     e -> e.sendEquipmentBreakStatus(
                             user.getActiveHand() == Hand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND));
         }
+
         return stack;
     }
 
     private void applyFoodEffects(ItemStack stack, World world, LivingEntity targetEntity) {
         Item item = stack.getItem();
-        super.finishUsing(stack, world, targetEntity);
         if (targetEntity instanceof ServerPlayerEntity serverPlayerEntity) {
             Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -86,39 +96,35 @@ public class MarshmallowStickItem extends ToolItem {
                     targetEntity.addStatusEffect(new StatusEffectInstance(pair.getFirst()));
                 }
             }
+            if (targetEntity instanceof PlayerEntity player) {
+                var food = item.getFoodComponent();
+                player.getHungerManager().add(food.getHunger(), food.getSaturationModifier());
+            }
         }
     }
-    ///public void setCooked(ItemStack stack,int cookedness){
-    ///    stack.getOrCreateNbt().putInt("Cookedness", MathHelper.clamp(cookedness,0,yesCooked));
-    ///}
-    ///public void setNetherite(ItemStack stack,int netherited){
-    ///    stack.getOrCreateNbt().putInt("Netherited", MathHelper.clamp(netherited,0,yesNetherite));
-    ///}
+
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        boolean superHit = super.postHit(stack, target, attacker);
-        StatusEffectInstance gooedEffect;
-        ///if (stack.getItem()== ModItems.MARSHMALLOW_STICK) {
-        ///    setCooked(stack,0);
-        ///    setNetherite(stack,0);
-        ///} else if (stack.getItem()==ModItems.COOKED_MARSHMALLOW_STICK){
-        ///    setCooked(stack,1);
-        ///    setNetherite(stack,0);
-        ///}else if (stack.getItem()==ModItems.NETHERITE_MARSHMALLOW_STICK){
-        ///    setCooked(stack,0);
-        ///    setNetherite(stack,1);
-        ///}else if (stack.getItem()==ModItems.COOKED_NETHERITE_MARSHMALLOW_STICK){
-        ///    setCooked(stack,1);
-        ///    setNetherite(stack,1);
-        ///}
-        int netheriteBooleanVar = stack.getOrCreateNbt().getInt("Netherited")+1;
-        int cookedBooleanVar = stack.getOrCreateNbt().getInt("Cooked")+1;
-        gooedEffect = new StatusEffectInstance(
-                    new GooedEffect(StatusEffectCategory.HARMFUL, 2551000),
-                    EnchantmentHelper.getLevel(new GooeynessEnchantment(), stack)*(10+2*netheriteBooleanVar)+10*cookedBooleanVar,
-                    cookedBooleanVar*EnchantmentHelper.getLevel(new GooeynessEnchantment(), stack)
-            );
-        target.setStatusEffect(gooedEffect, attacker);
-        return superHit;
+        boolean result = super.postHit(stack, target, attacker);
+        if(attacker instanceof PlayerEntity player){
+            if (player.getAttackCooldownProgressPerTick() >= 0.999f) {
+                StatusEffectInstance gooedEffect;
+                int netherited = yesNetherite;
+                int cooked = yesCooked;
+                int level = EnchantmentHelper.getLevel(ModEnchantments.GOOEYNESS, stack);
+                gooedEffect = new StatusEffectInstance(
+                        ModEffects.GOOED,
+                        level*(10+2*netherited)+100*cooked,
+                        cooked*EnchantmentHelper.getLevel(ModEnchantments.GOOEYNESS, stack)
+                );
+                target.setStatusEffect(gooedEffect, attacker);
+            }
+        }
+        stack.damage(3,
+                attacker,
+                e -> e.sendEquipmentBreakStatus(
+                        attacker.getActiveHand() == Hand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND));
+
+        return result;
     }
 }

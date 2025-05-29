@@ -1,10 +1,11 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
+import io.github.jaminajar.jaminajarmod.util.CombatUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageTypes;
+import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -37,8 +38,12 @@ public class BambooProjectileEntity extends PersistentProjectileEntity {
 
     public void tick(){
         super.tick();
+        if (this.age > 200) {
+            this.discard();
+        }
     }
     protected void onEntityHit(EntityHitResult entityHitResult){
+
         double roll = Math.random();
         if (roll < 0.33) {
             statusEffect = StatusEffects.BLINDNESS;
@@ -49,14 +54,17 @@ public class BambooProjectileEntity extends PersistentProjectileEntity {
         }
         StatusEffectInstance statusEffectInstance = new StatusEffectInstance(statusEffect, 200, 2);
         if (!this.getWorld().isClient()){
-            Entity entity = entityHitResult.getEntity();
+            Entity target = entityHitResult.getEntity();
+            Entity owner = this.getOwner();
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(DamageTypes.TRIDENT));
-            entity.damage(damageSource, 3.0F);
-            if(entity instanceof LivingEntity){
-                ((LivingEntity) entity).addStatusEffect(statusEffectInstance);
+                            .entryOf(ModDamageTypes.BAMBOO_PROJECTILE),owner);
+            if(target instanceof LivingEntity livingTarget){
+                CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,3.0f);
+                livingTarget.addStatusEffect(statusEffectInstance);
+            } else {
+                target.damage(damageSource,3.0f);
             }
         }
         this.discard();

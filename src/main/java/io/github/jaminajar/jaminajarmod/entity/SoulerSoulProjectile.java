@@ -2,14 +2,16 @@ package io.github.jaminajar.jaminajarmod.entity;
 
 import io.github.jaminajar.jaminajarmod.effects.ModEffects;
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
+import io.github.jaminajar.jaminajarmod.items.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -36,7 +38,10 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
     @Override
     public void tick() {
         super.tick();
-        ///this.setNoGravity(true);
+        this.setNoGravity(true);
+        if (this.age > 200) {
+            this.discard();
+        }
     }
 
     public void takeSoulKnockback(double strength, double x, double y, double z) {
@@ -59,41 +64,50 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
                 if (souled != null) {
                     souledStrength = souled.getAmplifier() + 1;
                 }
-                World world=this.getWorld();
-                target1.damage(ModDamageTypes.of(world, ModDamageTypes.SOULER_SOUL), 2.0F);
+            }
+            if (owner instanceof LivingEntity) {
+                DamageSource damageSource = new DamageSource(
+                        getWorld().getRegistryManager()
+                                .get(RegistryKeys.DAMAGE_TYPE)
+                                .entryOf(ModDamageTypes.SOULER_SOUL), owner);
+                target1.damage(damageSource, 3.0F);
+
+                // Additional hit effects
             }
             StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModEffects.SOULED, 300, 7 + souledStrength);
-            ///DamageSource damageSource = new DamageSource(this.getDamageSources().soul);
-
             takeSoulKnockback(5, target1.getX(), target1.getY(), target1.getZ());
+            if (owner instanceof PlayerEntity player) {
+                int emptyCount = 0;
+                for (ItemStack stack : player.getInventory().main) {
+                    if (stack.getItem() == ModItems.EMPTY_SOUL_CANISTER) {
+                        emptyCount += stack.getCount();
+                    }
+                }
+                boolean filled = false;
+                if (emptyCount > 0) {
+                    for (int i = 0; i < player.getInventory().size(); i++) {
+                        ItemStack stack = player.getInventory().getStack(i);
+                        if (stack.getItem() == ModItems.EMPTY_SOUL_CANISTER) {
+                            ItemStack fullStack = new ItemStack(ModItems.FULL_SOUL_CANISTER, 1);
+                            player.getInventory().setStack(i, fullStack);
+                            break;
+                        }
+                    }
+                } else{
+                    player.sendMessage(Text.literal("Soul Energy Full!"), true);
+                }
 
-            if (owner instanceof LivingEntity shooter) {
-                ItemStack heldItem = shooter.getMainHandStack();
-                if(target1 instanceof LivingEntity){
+                if (target1 instanceof LivingEntity) {
                     ((LivingEntity) target1).addStatusEffect(statusEffectInstance);
                 }
-                if (heldItem.hasNbt()) {
-                    NbtCompound tag = heldItem.getNbt();
-                    assert tag != null;
-                    int soulEnergy = tag.getInt("SoulEnergy");
-                    if (soulEnergy == 3) {
-                        if(owner instanceof PlayerEntity){
-                            owner.sendMessage(Text.literal("No Soul Energy!"));
-                        }
-                    } else {
-                        tag.putInt("SoulEnergy", soulEnergy + 1);
-                    }
-                } else {
-                    NbtCompound tag = new NbtCompound();
-                    tag.putInt("SoulEnergy", 1);
-                    heldItem.setNbt(tag);
-                }
+
             }
             this.discard();
         }
     }
+
     @Override
-    protected void onBlockHit(BlockHitResult blockHitResult){
+    protected void onBlockHit(BlockHitResult blockHitResult) {
         this.discard();
     }
 

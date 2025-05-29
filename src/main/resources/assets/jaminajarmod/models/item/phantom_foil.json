@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "gui_light": "front",
+  "textures": {
+    "layer0": "jaminajarmod:item/phantom_foil_2d"
+  }}

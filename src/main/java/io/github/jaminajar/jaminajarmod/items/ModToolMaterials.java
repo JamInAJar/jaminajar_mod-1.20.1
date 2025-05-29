@@ -10,7 +10,6 @@ import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
 
-	MACHETE(MiningLevels.IRON, 1031, 5.0F, 4.0F, 5, () -> Ingredient.ofItems(Items.IRON_INGOT)),
 	SCISSORS(MiningLevels.NETHERITE, 1500, 5.0F, 0F, 10, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)),
 	SOLBRAND(MiningLevels.DIAMOND,991, 5.0F, 0F, 15, () -> Ingredient.ofItems(Items.BLAZE_ROD)),
 	BOOM_TUBE(MiningLevels.WOOD,640,0.1f,5f,4,()->Ingredient.ofItems(Items.PAPER)),

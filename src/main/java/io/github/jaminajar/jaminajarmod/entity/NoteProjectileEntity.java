@@ -1,9 +1,9 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
+import io.github.jaminajar.jaminajarmod.util.CombatUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -19,7 +19,7 @@ public class NoteProjectileEntity extends PersistentProjectileEntity {
 
     public void setOwner(LivingEntity owner) {
         super.setOwner(owner);
-        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
+        this.setPosition(owner.getX(), owner.getEyeY() - 0.25, owner.getZ());
     }
     public NoteProjectileEntity(EntityType<? extends NoteProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -34,6 +34,8 @@ public class NoteProjectileEntity extends PersistentProjectileEntity {
     @Override
     public void tick() {
         super.tick();
+        if (this.age>200){
+            this.discard();}
         if (this.getWorld().isClient) {
             this.getWorld().addParticle(
                     ParticleTypes.NOTE,
@@ -50,10 +52,11 @@ public class NoteProjectileEntity extends PersistentProjectileEntity {
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(ModDamageTypes.NOTE_PROJECTILE));
-            target.damage(damageSource, 0.5F);
-            if (target instanceof LivingEntity) {
-                this.applyDamageEffects((LivingEntity)owner, target);
+                            .entryOf(ModDamageTypes.NOTE_PROJECTILE),owner);
+            if (target instanceof LivingEntity livingTarget) {
+                CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,1.5f);
+            } else{
+                target.damage(damageSource, 1.5f);
             }
             this.discard();
         }

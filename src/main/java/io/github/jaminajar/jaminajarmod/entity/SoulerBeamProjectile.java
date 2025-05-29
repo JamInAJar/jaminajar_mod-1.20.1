@@ -25,15 +25,22 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
         super.setOwner(owner);
         this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
+    private int consumedCanisters = 0;
+
+    public void setConsumedCanisters(int count) {
+        this.consumedCanisters = Math.min(3, count);
+    }
 
 
     @Override
-    public void tick(){
+    public void tick() {
         super.tick();
-        ///this.setNoGravity(true);
+        this.setNoGravity(true);
         if (!this.getWorld().isClient) {
         }
-
+        if (this.age > 200) {
+            this.discard();
+        }
         if (this.getWorld().isClient) {
             this.getWorld().addParticle(
                     ParticleTypes.SOUL,
@@ -42,31 +49,48 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
             );
         }
     }
-    @Override
-    protected void initDataTracker() {super.initDataTracker();}
 
-    protected void onEntityHit(EntityHitResult entityHitResult){
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+    }
+
+    private ItemStack stack = ItemStack.EMPTY;
+
+    public void setStack(ItemStack stack) {
+        this.stack = stack;
+    }
+
+    public ItemStack getStack() {
+        return stack;
+    }
+
+    @Override
+    protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity owner = this.getOwner();
         Entity target = entityHitResult.getEntity();
-        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.NAUSEA, 40, 7);
-        if(owner instanceof LivingEntity) {
+
+        if (owner != null) {
             DamageSource damageSource = new DamageSource(
                     getWorld().getRegistryManager()
                             .get(RegistryKeys.DAMAGE_TYPE)
-                            .entryOf(ModDamageTypes.SOULER_LASER));
-            target.damage(damageSource, 10.0F);
-            if(target instanceof LivingEntity){
-                ((LivingEntity) target).addStatusEffect(statusEffectInstance);
-            }
+                            .entryOf(ModDamageTypes.SOULER_LASER), owner);
 
-            // Additional hit effects
+            target.damage(damageSource, 7.5f * consumedCanisters);
+
+            if (target instanceof LivingEntity living) {
+                living.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 40, 7));
+            }
         }
         this.discard();
     }
+
+
     @Override
-    protected void onBlockHit(BlockHitResult blockHitResult){
+    protected void onBlockHit(BlockHitResult blockHitResult) {
         this.discard();
     }
+
     @Override
     protected ItemStack asItemStack() {
         return ItemStack.EMPTY;
