@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "b": {
+      "tag": "minecraft:buttons"
+    },
+    "e": {
+      "item": "minecraft:repeater"
+    },
+    "h": {
+      "item": "jaminajarmod:comfy_handle"
+    },
+    "p": {
+      "item": "minecraft:redstone_block"
+    },
+    "r": {
+      "item": "jaminajarmod:ravager_screw"
+    },
+    "s": {
+      "item": "jaminajarmod:crimson_blade"
+    }
+  },
+  "pattern": [
+    "esr",
+    "bhp",
+    "esr"
+  ],
+  "result": {
+    "item": "jaminajarmod:helicopter_blade"
+  },
+  "show_notification": true
+}

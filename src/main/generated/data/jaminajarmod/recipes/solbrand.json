@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "jaminajarmod:incandescent_blade"
+    },
+    "g": {
+      "item": "minecraft:tinted_glass"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "r": {
+      "item": "minecraft:blaze_rod"
+    },
+    "s": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "pattern": [
+    "gbg",
+    "gng",
+    "srs"
+  ],
+  "result": {
+    "item": "jaminajarmod:solbrand"
+  },
+  "show_notification": true
+}

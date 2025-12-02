@@ -4,6 +4,8 @@ import io.github.jaminajar.jaminajarmod.JamInAJarMod;
 import io.github.jaminajar.jaminajarmod.items.custom.*;
 import io.github.jaminajar.jaminajarmod.items.food.ModFoods;
 import io.github.jaminajar.jaminajarmod.items.soul.SoulCanisterItem;
+import io.github.jaminajar.jaminajarmod.items.soul.SoulExplosiveItem;
+import io.github.jaminajar.jaminajarmod.items.soul.SoulGrenadeItem;
 import io.github.jaminajar.jaminajarmod.items.soul.SoulerItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 
@@ -42,8 +44,10 @@ public class ModItems{
 	public static final Item COOKED_NETHERITE_MARSHMALLOW_STICK =registerItem("cooked_netherite_marshmallow_stick",new MarshmallowStickItem(ModToolMaterials.NETHERITE_MARSHMALLOW_STICK,9,-2.8f,new Item.Settings().fireproof().food(ModFoods.COOKED_MARSHMALLOW),1,1));
 
 	public static final Item SOULER = registerItem("souler", new SoulerItem(new Item.Settings().maxCount(1)));
-	public static final Item EMPTY_SOUL_CANISTER = registerItem("empty_soul_canister", new SoulCanisterItem(new Item.Settings().maxCount(1),0));
-	public static final Item FULL_SOUL_CANISTER = registerItem("full_soul_canister", new SoulCanisterItem(new Item.Settings().maxCount(1),1));
+	public static final Item EMPTY_SOUL_CANISTER = registerItem("empty_soul_canister", new SoulCanisterItem(new Item.Settings().maxCount(1)));
+	public static final Item FULL_SOUL_CANISTER = registerItem("full_soul_canister", new SoulCanisterItem(new Item.Settings().maxCount(1)));
+    public static final Item EMPTY_SOUL_GRENADE = registerItem("empty_soul_grenade", new SoulGrenadeItem(new Item.Settings().maxCount(1),0,1));
+    public static final Item FULL_SOUL_GRENADE = registerItem("full_soul_grenade", new SoulGrenadeItem(new Item.Settings().maxCount(1),1,1));
 
 	public static final Item BOOM_TUBE = registerItem("boom_tube", new BoomtubeItem(ModToolMaterials.BOOM_TUBE,5, -2.6f,new Item.Settings().maxCount(1),32));
 	public static final Item CACOPHONY = registerItem("cacophony",new CacophonyItem(new Item.Settings().maxCount(1)));

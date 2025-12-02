@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_bars"
+    },
+    "n": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "w": {
+      "item": "minecraft:gray_wool"
+    }
+  },
+  "pattern": [
+    " n ",
+    "iwi",
+    " n "
+  ],
+  "result": {
+    "item": "jaminajarmod:comfy_handle"
+  },
+  "show_notification": true
+}

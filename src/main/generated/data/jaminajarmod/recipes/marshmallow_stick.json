@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_sword"
+    },
+    {
+      "item": "jaminajarmod:marshmallow"
+    },
+    {
+      "item": "jaminajarmod:marshmallow"
+    },
+    {
+      "item": "jaminajarmod:marshmallow"
+    },
+    {
+      "item": "jaminajarmod:marshmallow"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "result": {
+    "item": "jaminajarmod:marshmallow_stick"
+  }
+}

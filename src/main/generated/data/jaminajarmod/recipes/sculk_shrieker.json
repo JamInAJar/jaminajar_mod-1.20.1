@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:sculk"
+    },
+    "s": {
+      "item": "jaminajarmod:biospeaker"
+    }
+  },
+  "pattern": [
+    "   ",
+    " s ",
+    "bbb"
+  ],
+  "result": {
+    "count": 3,
+    "item": "minecraft:sculk_shrieker"
+  },
+  "show_notification": true
+}

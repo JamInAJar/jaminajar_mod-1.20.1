@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jaminajarmod:item/full_soul_canister"
+  }
+}

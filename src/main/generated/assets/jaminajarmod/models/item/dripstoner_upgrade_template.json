@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jaminajarmod:item/dripstoner_upgrade_template"
+  }
+}

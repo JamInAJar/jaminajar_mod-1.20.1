@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 30,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "jaminajarmod:marshmallow_stick"
+  },
+  "result": "jaminajarmod:cooked_marshmallow_stick"
+}

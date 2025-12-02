@@ -69,6 +69,14 @@ public class ModEntities {
                     .trackRangeChunks(4)
                     .trackedUpdateRate(10)
                     .build());
+    public static final EntityType<SoulerSoulGrenadeEntity> SOUL_GRENADE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(JamInAJarMod.MOD_ID,"soul_grenade"),
+            FabricEntityTypeBuilder.<SoulerSoulGrenadeEntity>create(SpawnGroup.MISC,SoulerSoulGrenadeEntity::new)
+                    .dimensions(EntityDimensions
+                            .fixed(1.25f,1.25f))
+                    .trackRangeChunks(4)
+                    .trackedUpdateRate(10)
+                    .build());
     private World world;
 
 

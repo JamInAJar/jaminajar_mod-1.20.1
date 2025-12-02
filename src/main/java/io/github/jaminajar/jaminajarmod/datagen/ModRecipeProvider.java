@@ -46,6 +46,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('l', LEVER)
                 .input('c', LIGHTNING_ROD)
                 .input('s', ItemTags.SOUL_FIRE_BASE_BLOCKS)
+                /// soul crystal - from soul sand/soil
                 .input('i', IRON_BLOCK)
                 .input('n', NETHERITE_SCRAP)
                 .input('g', IRON_INGOT)

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "minecraft:dripstone_block"
+    },
+    "S": {
+      "item": "jaminajarmod:dripstoner_upgrade_template"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "jaminajarmod:dripstoner_upgrade_template"
+  },
+  "show_notification": true
+}

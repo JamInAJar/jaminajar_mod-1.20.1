@@ -34,7 +34,7 @@ public class SoulerItem extends Item {
         int soulEnergy = 0;
         for (int i = 0; i < user.getInventory().size(); i++) {
             ItemStack stack1 = user.getInventory().getStack(i);
-            if (stack1.getItem() == ModItems.FULL_SOUL_CANISTER) {
+            if (stack1.getItem() == ModItems.FULL_SOUL_CANISTER||stack1.getItem()==ModItems.FULL_SOUL_GRENADE) {
                 soulEnergy++;
             }
         }
@@ -49,6 +49,10 @@ public class SoulerItem extends Item {
                         canisterCount++;
                         user.getInventory().setStack(i, new ItemStack(ModItems.EMPTY_SOUL_CANISTER));
                         if (canisterCount >= 3) break;
+                    } else if(stack1.getItem()==ModItems.FULL_SOUL_GRENADE){
+                        canisterCount++;
+                        user.getInventory().setStack(i, new ItemStack(ModItems.EMPTY_SOUL_GRENADE));
+                        if (canisterCount >= 3) break;
                     }
                 }
                 SoulerBeamProjectile beam = new SoulerBeamProjectile(ModEntities.SOULER_BEAM_PROJECTILE, world);
@@ -59,7 +63,7 @@ public class SoulerItem extends Item {
                 beam.setConsumedCanisters(soulEnergy);
                 world.spawnEntity(beam);
                 user.getItemCooldownManager().set(this, 20);
-            } else {
+            } else if(soulEnergy<=0){
                 user.sendMessage(Text.literal("No Soul Energy!"), true);
             }
         } else if (!world.isClient) {

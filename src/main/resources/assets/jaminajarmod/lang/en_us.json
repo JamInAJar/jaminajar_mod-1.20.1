@@ -30,16 +30,17 @@
   "enchantment.jaminajarmod.pentaboom": "Pentaboom",
   "enchantment.jaminajarmod.smart_pitch": "Smart Pitch",
   "tooltip.jaminajarmod.tooltip": "Fill with Gunpowder",
-  "death.attack.was_souled": "%1$s was souled by %2%s",
+  "death.attack.was_souled": "%1$s was drained by %2%s",
   "death.attack.was_lasered": "%1$s was shot by %2%s",
+  "death.attack.selfsouled": "%1$s exhausted their soul energy reserves",
   "death.attack.ran_out_of_breath": "%1$s ran out of breath",
   "death.attack.note_projectile_damage": "%1$s couldn't face %2$s's music",
   "death.attack.falling_bamboo": "%1$s was skewered by %2$s's poisoned bamboo",
   "death.attack.falling_dripstone": "%1$s was skewered by %2$s's falling stalactite",
 
   "upgrade.dripstoner_upgrade_template.applies_to": "Bamboozler",
-  "upgrade.dripstoner_upgrade_template.ingredients": "Copper Block",
+  "upgrade.dripstoner_upgrade_template.ingredients": "Dripstone Block",
   "upgrade.dripstoner_upgrade_template.base_slot_description": "Add Bamboozler",
-  "upgrade.dripstoner_upgrade_template.additions_slot_description": "Add Copper Block",
+  "upgrade.dripstoner_upgrade_template.additions_slot_description": "Add Dripstone Block",
   "upgrade.dripstoner_upgrade_template.title": "Upgrade:"
 }

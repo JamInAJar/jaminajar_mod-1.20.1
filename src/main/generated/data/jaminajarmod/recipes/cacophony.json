@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "g": {
+      "item": "minecraft:goat_horn"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "o": {
+      "item": "minecraft:echo_shard"
+    },
+    "s": {
+      "item": "jaminajarmod:biospeaker"
+    }
+  },
+  "pattern": [
+    "odo",
+    "sgs",
+    "ndn"
+  ],
+  "result": {
+    "item": "jaminajarmod:cacophony"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "n": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "p": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    "pnp",
+    "pnp",
+    "pnp"
+  ],
+  "result": {
+    "item": "jaminajarmod:boom_tube"
+  },
+  "show_notification": true
+}

@@ -16,10 +16,10 @@ public class ModDamageTypeTagProvider extends TagProvider<DamageType> {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup lookup) {
-        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_INVULNERABILITY).add(ModDamageTypes.HELICOPTER_SWORD_SPIN).add(ModDamageTypes.NOTE_PROJECTILE).add(ModDamageTypes.UNATTRIBUTED_NOTE_PROJECTILE).add(ModDamageTypes.CACOPHONY_OVERBLOW);
-        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.SOULER_LASER).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.NOTE_PROJECTILE);
-        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(ModDamageTypes.CACOPHONY_OVERBLOW);
-        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_EFFECTS).add(ModDamageTypes.CACOPHONY_OVERBLOW);
+        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_INVULNERABILITY).add(ModDamageTypes.HELICOPTER_SWORD_SPIN).add(ModDamageTypes.NOTE_PROJECTILE).add(ModDamageTypes.UNATTRIBUTED_NOTE_PROJECTILE).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.SOULER_SELFSOUL);
+        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.SOULER_LASER).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.NOTE_PROJECTILE).add(ModDamageTypes.SOULER_SELFSOUL);
+        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.SOULER_SELFSOUL);
+        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_EFFECTS).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.SOULER_SELFSOUL);
         this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_SHIELD).add(ModDamageTypes.DRIPSTONE_PROJECTILE).add(ModDamageTypes.BAMBOO_PROJECTILE);
     }
 }

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_netherite_marshmallow_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "jaminajarmod:netherite_marshmallow_stick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cooked_netherite_marshmallow_stick_from_"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_netherite_marshmallow_stick",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cooked_netherite_marshmallow_stick_from_"
+    ]
+  },
+  "sends_telemetry_event": false
+}

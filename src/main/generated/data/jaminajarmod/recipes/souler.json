@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "minecraft:lightning_rod"
+    },
+    "g": {
+      "item": "minecraft:iron_ingot"
+    },
+    "i": {
+      "item": "minecraft:iron_block"
+    },
+    "l": {
+      "item": "minecraft:lever"
+    },
+    "n": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "r": {
+      "item": "jaminajarmod:ravager_screw"
+    },
+    "s": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    }
+  },
+  "pattern": [
+    " rl",
+    "csi",
+    " ng"
+  ],
+  "result": {
+    "item": "jaminajarmod:souler"
+  },
+  "show_notification": true
+}

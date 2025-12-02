@@ -9,9 +9,12 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier("jaminajarmod", "bamboo_projectile"), "main");
     public static final EntityModelLayer DRIPSTONE_PROJECTILE =
             new EntityModelLayer(new Identifier("jaminajarmod", "dripstone_projectile"), "main");
+    public static final EntityModelLayer SOUL_GRENADE =
+            new EntityModelLayer(new Identifier("jaminajarmod", "soul_grenade"), "main");
 
     public static void registerModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(BAMBOO_PROJECTILE, BambooProjectileModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(DRIPSTONE_PROJECTILE, DripstoneProjectileModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SOUL_GRENADE, SoulerSoulGrenadeEntityModel::getTexturedModelData);
     }
 }

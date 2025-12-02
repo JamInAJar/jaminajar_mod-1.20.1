@@ -5,6 +5,7 @@ import io.github.jaminajar.jaminajarmod.items.custom.BamboozlerItem;
 import io.github.jaminajar.jaminajarmod.items.custom.BoomtubeItem;
 import io.github.jaminajar.jaminajarmod.items.custom.CacophonyItem;
 import io.github.jaminajar.jaminajarmod.items.custom.DripstonerItem;
+import io.github.jaminajar.jaminajarmod.items.soul.SoulerItem;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -37,6 +38,10 @@ public class PlayerEntityRendererMixin {
             ci.cancel();
         }
         if(player.getStackInHand(hand).getItem() instanceof DripstonerItem) {
+            ci.setReturnValue(ArmPose.CROSSBOW_HOLD);
+            ci.cancel();
+        }
+        if(player.getStackInHand(hand).getItem() instanceof SoulerItem) {
             ci.setReturnValue(ArmPose.CROSSBOW_HOLD);
             ci.cancel();
         }

@@ -22,6 +22,7 @@ public class JamInAJarModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.HONK_PROJECTILE, HonkProjectileEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.BAMBOO_PROJECTILE, BambooProjectileRenderer::new);
         EntityRendererRegistry.register(ModEntities.DRIPSTONE_PROJECTILE, DripstoneProjectileRenderer::new);
+        EntityRendererRegistry.register(ModEntities.SOUL_GRENADE, SoulerSoulGrenadeEntityRenderer::new);
         HudRenderCallback.EVENT.register(new HudRenderHandler());
         EntityModelLayerRegistry.registerModelLayer(
                 ModModelLayers.DRIPSTONE_PROJECTILE,
@@ -30,6 +31,10 @@ public class JamInAJarModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(
                 ModModelLayers.BAMBOO_PROJECTILE,
                 BambooProjectileModel::getTexturedModelData
+        );
+        EntityModelLayerRegistry.registerModelLayer(
+                ModModelLayers.SOUL_GRENADE,
+                SoulerSoulGrenadeEntityModel::getTexturedModelData
         );
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.CACOPHONY, new CacophonyItemRenderer());
 

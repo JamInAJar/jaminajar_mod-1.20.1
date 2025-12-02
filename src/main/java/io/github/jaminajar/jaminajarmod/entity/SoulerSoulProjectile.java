@@ -56,8 +56,6 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
         if (!this.getWorld().isClient()) {
             Entity target1 = entityHitResult.getEntity();
             Entity owner = this.getOwner();
-
-
             int souledStrength = 0;
             if (target1 instanceof LivingEntity target) {
                 StatusEffectInstance souled = target.getStatusEffect(ModEffects.SOULED);
@@ -74,7 +72,7 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
 
                 // Additional hit effects
             }
-            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModEffects.SOULED, 300, 7 + souledStrength);
+            StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModEffects.SOULED, 100, 2 + souledStrength);
             takeSoulKnockback(5, target1.getX(), target1.getY(), target1.getZ());
             if (owner instanceof PlayerEntity player) {
                 int emptyCount = 0;
@@ -84,19 +82,20 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
                     }
                 }
                 boolean filled = false;
-                if (emptyCount > 0) {
-                    for (int i = 0; i < player.getInventory().size(); i++) {
-                        ItemStack stack = player.getInventory().getStack(i);
-                        if (stack.getItem() == ModItems.EMPTY_SOUL_CANISTER) {
-                            ItemStack fullStack = new ItemStack(ModItems.FULL_SOUL_CANISTER, 1);
-                            player.getInventory().setStack(i, fullStack);
-                            break;
+                if (target1 instanceof  LivingEntity) {
+                    if (emptyCount > 0 && !((LivingEntity) target1).hasStatusEffect(ModEffects.SOULED)) {
+                        for (int i = 0; i < player.getInventory().size(); i++) {
+                            ItemStack stack = player.getInventory().getStack(i);
+                            if (stack.getItem() == ModItems.EMPTY_SOUL_CANISTER) {
+                                ItemStack fullStack = new ItemStack(ModItems.FULL_SOUL_CANISTER, 1);
+                                player.getInventory().setStack(i, fullStack);
+                                break;
+                            }
                         }
+                    } else if(emptyCount<=0){
+                        player.sendMessage(Text.literal("Soul Energy Full!"), true);
                     }
-                } else{
-                    player.sendMessage(Text.literal("Soul Energy Full!"), true);
                 }
-
                 if (target1 instanceof LivingEntity) {
                     ((LivingEntity) target1).addStatusEffect(statusEffectInstance);
                 }

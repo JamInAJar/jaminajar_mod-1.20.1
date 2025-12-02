@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 300,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "jaminajarmod:netherite_marshmallow_stick"
+  },
+  "result": "jaminajarmod:cooked_netherite_marshmallow_stick"
+}

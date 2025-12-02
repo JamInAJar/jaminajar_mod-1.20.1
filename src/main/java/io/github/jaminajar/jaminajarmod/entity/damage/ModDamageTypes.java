@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 public interface ModDamageTypes {
     RegistryKey<DamageType> SOULER_SOUL = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "souled"));
     RegistryKey<DamageType> SOULER_LASER = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "lasered"));
+    RegistryKey<DamageType> SOULER_SELFSOUL = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "selfsouled"));
     RegistryKey<DamageType> UNATTRIBUTED_NOTE_PROJECTILE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("unattributed_note_projectile"));
     RegistryKey<DamageType> NOTE_PROJECTILE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod","note_projectile_damage"));
     RegistryKey<DamageType> HELICOPTER_SWORD_SPIN = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod","heli_sword_spin"));

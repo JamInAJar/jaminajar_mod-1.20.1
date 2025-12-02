@@ -24,7 +24,19 @@ public abstract class ItemRendererMixin {
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"heli_blade_3d","inventory"));
         }
         if(stack.isOf(ModItems.SOULER)){
-            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"souler_3d","inventory"));
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"souler","inventory"));
+        }
+        if(stack.isOf(ModItems.EMPTY_SOUL_CANISTER)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"empty_soul_canister_3d","inventory"));
+        }
+        if(stack.isOf(ModItems.FULL_SOUL_CANISTER)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"full_soul_canister_3d","inventory"));
+        }
+        if(stack.isOf(ModItems.EMPTY_SOUL_GRENADE)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"empty_soul_grenade_3d","inventory"));
+        }
+        if(stack.isOf(ModItems.FULL_SOUL_GRENADE)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"full_soul_grenade_3d","inventory"));
         }
         if(stack.isOf(ModItems.BAMBOOZLER)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"bamboozler_3d","inventory"));

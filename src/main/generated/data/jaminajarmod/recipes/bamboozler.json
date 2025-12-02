@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "b": {
+      "item": "minecraft:bamboo"
+    },
+    "e": {
+      "item": "minecraft:spider_eye"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "l": {
+      "item": "minecraft:bamboo_block"
+    },
+    "p": {
+      "item": "minecraft:pufferfish"
+    }
+  },
+  "pattern": [
+    "gie",
+    "pbb",
+    "li "
+  ],
+  "result": {
+    "item": "jaminajarmod:bamboozler"
+  },
+  "show_notification": true
+}
