@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:flint"
+    },
+    "r": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "pattern": [
+    " r ",
+    "rfr",
+    " r "
+  ],
+  "result": {
+    "count": 4,
+    "item": "jaminajarmod:rock"
+  },
+  "show_notification": true
+}

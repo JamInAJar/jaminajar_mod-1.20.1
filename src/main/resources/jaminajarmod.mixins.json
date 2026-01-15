@@ -3,17 +3,24 @@
   "package": "io.github.jaminajar.jaminajarmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "DamageEnchantmentMixin",
     "ExampleMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "PhantomAggroMixin",
+    "PhantomDamageMixin"
   ],
   "client": [
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
-    "PlayerEntityRendererMixin"
-
+    "PhantomArmorTransparencyMixin",
+    "PhantomElytraMixin",
+    "PhantomHeldItemMixin",
+    "PhantomLabelMixin",
+    "PhantomRenderMixin",
+    "PlayerArmPoseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  }
 }

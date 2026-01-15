@@ -1,5 +1,6 @@
 package io.github.jaminajar.jaminajarmod.datagen;
 
+
 import io.github.jaminajar.jaminajarmod.items.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -18,7 +19,7 @@ public class ModModelProvider extends FabricModelProvider {
         //BlockStateModelGenerator.BlockTexturePool marshmallowPool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.MARSHMALLOW_BLOCK);
 
         //marshmallowPool.slab((ModBlocks.MARSHMALLOW_SLAB));
-
+//        blockStateModelGenerator.registerSimpleState(ModBlocks.SOUL_BOMB);
     }
 
     @Override
@@ -46,5 +47,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.DRIPSTONER_UPGRADE_TEMPLATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.EMPTY_SOUL_CANISTER, Models.GENERATED);
         itemModelGenerator.register(ModItems.FULL_SOUL_CANISTER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SOULSTEEL_PICKAXE,Models.HANDHELD);
+        itemModelGenerator.register(ModItems.SOULSTEEL_SHOVEL,Models.HANDHELD);
+        itemModelGenerator.register(ModItems.SOULSTEEL_HOE,Models.HANDHELD);
     }
 }

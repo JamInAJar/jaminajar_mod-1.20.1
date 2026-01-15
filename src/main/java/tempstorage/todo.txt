@@ -2,10 +2,11 @@ zoom with hat
 
 SFX
 
-Helicopter Sword spinny
+change crafting recipe helisword
 
 Split shield thingy
-
+storage shield
+toilet/tissue paper weapon, enchantment "<n>-ply", increases <pierce???> of weapon
 crowbar that crows perch on
 crow bar crow bar crow's crowbar
 
@@ -31,7 +32,9 @@ high amount of item in chest. item is fuel, tame material, smth for something el
 
 Nether<->Overworld switching item?
 
-Limited durability unbreakable durability-regenning fast phantom foil
+gigaton hammer ux improvements
+charge meter and/or sound
+sounds
 
 offhands chestplate
 card
@@ -39,30 +42,28 @@ wand
 
 particle
 
-tinkaton hammer
+soulsteel tool/armour set
 
+trapped sculk shrieker actually spawns a warden, make with biospeaker?
 
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:incandescent_blade#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/incandescent_blade
-[10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:solbrand#inventory:
-    minecraft:textures/atlas/blocks.png:jaminajarmod:item/solbrand
-[10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:souler#inventory:
-    minecraft:textures/atlas/blocks.png:jaminajarmod:item/souler
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:crimson_blade#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/crimson_blade
 [10:43:16] [Worker-Main-10/WARN] (Minecraft) Missing textures in model jaminajarmod:blade_core#inventory:
     minecraft:textures/atlas/blocks.png:jaminajarmod:item/blade_core
 
 ancient plant tamable/boss stronger sniffer
-5 big booms
+
 ned kelly helmet rare creature bird
 
 experienced souler hat/curio
 
+Implement:
+
+
 make or implement/fix sprites/models for:
-Gooed and Souled status effect icons
-Solbrand pixel art
-helicopter sword
+
 
 soul bomb
 Soul canister and soul grenade crafting recipe
@@ -73,7 +74,8 @@ ammoitem + souler ammo HUD
 Effect icons
 ,
 		"DaFuqs: Code from Spectrum for Scissorblades"
-bamboozler to dripstoner upgrade - in mineshaft chest?
+
+
 soul crystal worldgen
 lang
 update to 1.21.1???
@@ -81,8 +83,18 @@ crossbow enchant that allows you to load boomtubes
 mailbox
 dumpster
 hotbar swapper
-helicopter blades - testfor dual wielding, enable flying if ye
+
 soul crystals
 
+EnchantmentTypes
+
+cacophony sound progressively gets worse as its played
+use sculk chirp sound
+
+souler fills soul grenades
+fix soul bomb model
+
 it'd be funny to just make souler in minecraft
-Fix 2d sprites of soul canisters
+
+low gravity thingy
+pocket dimension, sward pets come out of portal from dimension

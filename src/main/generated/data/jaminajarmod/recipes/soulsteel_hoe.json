@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "i": {
+      "item": "jaminajarmod:soulsteel_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "ii",
+    " s",
+    " s"
+  ],
+  "result": {
+    "item": "jaminajarmod:soulsteel_hoe"
+  },
+  "show_notification": true
+}

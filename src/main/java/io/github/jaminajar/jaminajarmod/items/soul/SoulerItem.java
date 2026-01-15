@@ -4,6 +4,7 @@ import io.github.jaminajar.jaminajarmod.entity.ModEntities;
 import io.github.jaminajar.jaminajarmod.entity.SoulerBeamProjectile;
 import io.github.jaminajar.jaminajarmod.entity.SoulerSoulProjectile;
 import io.github.jaminajar.jaminajarmod.items.ModItems;
+import io.github.jaminajar.jaminajarmod.util.ModTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,7 @@ public class SoulerItem extends Item {
         int soulEnergy = 0;
         for (int i = 0; i < user.getInventory().size(); i++) {
             ItemStack stack1 = user.getInventory().getStack(i);
-            if (stack1.getItem() == ModItems.FULL_SOUL_CANISTER||stack1.getItem()==ModItems.FULL_SOUL_GRENADE) {
+            if (stack1.isIn(ModTags.FULL_SOUL_ITEMS)) {
                 soulEnergy++;
             }
         }
@@ -67,14 +68,14 @@ public class SoulerItem extends Item {
                 user.sendMessage(Text.literal("No Soul Energy!"), true);
             }
         } else if (!world.isClient) {
-                SoulerSoulProjectile soul = new SoulerSoulProjectile(ModEntities.SOULER_SOUL_PROJECTILE, world);
-                soul.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 1.0F);
-                soul.setOwner(user);
-                soul.setNoGravity(true);
-                soul.setCritical(false);
+            SoulerSoulProjectile soul = new SoulerSoulProjectile(ModEntities.SOULER_SOUL_PROJECTILE, world);
+            soul.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3.0F, 1.0F);
+            soul.setOwner(user);
+            soul.setNoGravity(true);
+            soul.setCritical(false);
 
-                world.spawnEntity(soul);
-                user.getItemCooldownManager().set(this, 10);
+            world.spawnEntity(soul);
+            user.getItemCooldownManager().set(this, 10);
 
         }
 

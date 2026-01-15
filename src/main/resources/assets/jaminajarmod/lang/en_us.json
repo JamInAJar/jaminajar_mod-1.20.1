@@ -11,9 +11,21 @@
   "item.jaminajarmod.biospeaker": "Sculk Biospeaker",
   "item.jaminajarmod.boom_tube": "Boom Tube",
   "item.jaminajarmod.cacophony": "Cacophony",
+  "item.jaminajarmod.gigaton_hammer": "Gigaton Hammer",
+  "item.jaminajarmod.rock": "Rock",
+
   "item.jaminajarmod.souler": "Souler",
   "item.jaminajarmod.empty_soul_canister": "Empty Soul Canister",
   "item.jaminajarmod.full_soul_canister": "Full Soul Canister",
+  "item.jaminajarmod.empty_soul_grenade": "Empty Soul Grenade",
+  "item.jaminajarmod.full_soul_grenade": "Full Soul Grenade",
+  "item.jaminajarmod.soulsteel_swordaxe": "Soulsteel Swordaxe",
+  "item.jaminajarmod.soulsteel_axesword": "Soulsteel Axesword",
+  "item.jaminajarmod.soulsteel_pickaxe": "Soulsteel Pickaxe",
+  "item.jaminajarmod.soulsteel_shovel": "Soulsteel Shovel",
+  "item.jaminajarmod.soulsteel_hoe": "Soulsteel Hoe",
+
+
   "item.jaminajarmod.helicopter_blade": "Helicopter Blade",
   "item.jaminajarmod.marshmallow": "Marshmallow",
   "item.jaminajarmod.cooked_marshmallow": "Cooked Marshmallow",
@@ -25,22 +37,41 @@
   "item.jaminajarmod.dripstoner": "Dripstoner",
   "item.jaminajarmod.phantom_foil": "Phantom Foil",
   "item.jaminajarmod.dripstoner_upgrade_template": "Dripstoner Upgrade Template",
+
+  "block.jaminajarmod.soul_bomb": "Soul Bomb",
+  "block.jaminajarmod.soulsteel_block": "Block of Soulsteel",
+
   "enchantment.jaminajarmod.blast": "Blast",
   "enchantment.jaminajarmod.gooeyness": "Gooeyness",
   "enchantment.jaminajarmod.pentaboom": "Pentaboom",
   "enchantment.jaminajarmod.smart_pitch": "Smart Pitch",
+  "enchantment.jaminajarmod.bulldoze": "Bulldoze",
+  "enchantment.jaminajarmod.rock_smash": "Rock Smash",
+
+  "effect.jaminajarmod.souled": "Soulsickness",
+  "effect.jaminajarmod.gooed": "Goo",
+
   "tooltip.jaminajarmod.tooltip": "Fill with Gunpowder",
-  "death.attack.was_souled": "%1$s was drained by %2%s",
-  "death.attack.was_lasered": "%1$s was shot by %2%s",
+
+  "death.attack.was_souled": "%1$s was drained by %2$s",
+  "death.attack.was_lasered": "%1$s was shot by %2$s",
   "death.attack.selfsouled": "%1$s exhausted their soul energy reserves",
   "death.attack.ran_out_of_breath": "%1$s ran out of breath",
   "death.attack.note_projectile_damage": "%1$s couldn't face %2$s's music",
-  "death.attack.falling_bamboo": "%1$s was skewered by %2$s's poisoned bamboo",
+  "death.attack.falling_bamboo": "%1$s was skewered by %2$s's toxified bamboo",
   "death.attack.falling_dripstone": "%1$s was skewered by %2$s's falling stalactite",
+  "death.attack.immolated": "%1$s was consumed by a raging inferno",
+  "death.attack.was_flattened": "%1$s was flattened by %2$s",
 
   "upgrade.dripstoner_upgrade_template.applies_to": "Bamboozler",
   "upgrade.dripstoner_upgrade_template.ingredients": "Dripstone Block",
   "upgrade.dripstoner_upgrade_template.base_slot_description": "Add Bamboozler",
   "upgrade.dripstoner_upgrade_template.additions_slot_description": "Add Dripstone Block",
-  "upgrade.dripstoner_upgrade_template.title": "Upgrade:"
+  "upgrade.dripstoner_upgrade_template.title": "Upgrade:",
+
+  "itemgroup.souler_group": "Souler Items",
+
+  "gui.jaminajarmod.soul_bomb": "Soul Bomb",
+
+  "key.jaminajarmod.soulsteel_swordaxe_switch_grip_key":"Soulsteel Swordaxe Switch Grip"
 }

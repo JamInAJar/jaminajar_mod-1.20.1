@@ -15,8 +15,8 @@ public class ModLootTableModifiers {
             new Identifier("minecraft","entities/ravager");
     private static final Identifier WARDEN_ID=
             new Identifier("minecraft", "entities/warden");
-    private static final Identifier DUNGEON_CHEST_ID =
-            new Identifier("minecraft","chests/simple_dungeon");
+    private static final Identifier MINESHAFT_CHEST_ID =
+            new Identifier("minecraft","chests/abandoned_mineshaft");
     public static void modifyLootTables(){
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (RAVAGER_ID.equals(id)){
@@ -35,7 +35,7 @@ public class ModLootTableModifiers {
                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0f,1.0f)));
                 tableBuilder.pool(poolBuilder.build());
             }
-            if(DUNGEON_CHEST_ID.equals(id)){
+            if(MINESHAFT_CHEST_ID.equals(id)){
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(0.15f))

@@ -17,6 +17,8 @@ public interface ModDamageTypes {
     RegistryKey<DamageType> CACOPHONY_OVERBLOW= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "cacophony_overblow"));
     RegistryKey<DamageType> BAMBOO_PROJECTILE= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "falling_bamboo"));
     RegistryKey<DamageType> DRIPSTONE_PROJECTILE= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "falling_dripstone"));
+    RegistryKey<DamageType> SEARING_FIRE= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "searing_fire"));
+    RegistryKey<DamageType> FLATTENED= RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier("jaminajarmod", "flattened"));
    // static void bootstrap(Registerable<DamageType> damageTypeRegisterable){
     //}
    public static DamageSource of(World world, RegistryKey<DamageType> key) {

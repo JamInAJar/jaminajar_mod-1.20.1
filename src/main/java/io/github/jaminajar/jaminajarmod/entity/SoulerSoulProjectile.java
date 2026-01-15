@@ -79,15 +79,20 @@ public class SoulerSoulProjectile extends PersistentProjectileEntity {
                 for (ItemStack stack : player.getInventory().main) {
                     if (stack.getItem() == ModItems.EMPTY_SOUL_CANISTER) {
                         emptyCount += stack.getCount();
+                    } else if (stack.getItem() == ModItems.EMPTY_SOUL_GRENADE) {
+                        emptyCount += stack.getCount();
                     }
                 }
-                boolean filled = false;
                 if (target1 instanceof  LivingEntity) {
                     if (emptyCount > 0 && !((LivingEntity) target1).hasStatusEffect(ModEffects.SOULED)) {
                         for (int i = 0; i < player.getInventory().size(); i++) {
                             ItemStack stack = player.getInventory().getStack(i);
                             if (stack.getItem() == ModItems.EMPTY_SOUL_CANISTER) {
                                 ItemStack fullStack = new ItemStack(ModItems.FULL_SOUL_CANISTER, 1);
+                                player.getInventory().setStack(i, fullStack);
+                                break;
+                            } else if (stack.getItem() == ModItems.EMPTY_SOUL_GRENADE) {
+                                ItemStack fullStack = new ItemStack(ModItems.FULL_SOUL_GRENADE, 1);
                                 player.getInventory().setStack(i, fullStack);
                                 break;
                             }

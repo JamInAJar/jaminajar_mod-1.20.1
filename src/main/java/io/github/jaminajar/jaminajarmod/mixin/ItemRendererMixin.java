@@ -26,10 +26,10 @@ public abstract class ItemRendererMixin {
         if(stack.isOf(ModItems.SOULER)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"souler","inventory"));
         }
-        if(stack.isOf(ModItems.EMPTY_SOUL_CANISTER)){
+        if(stack.isOf(ModItems.EMPTY_SOUL_CANISTER)&&renderMode != ModelTransformationMode.GUI){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"empty_soul_canister_3d","inventory"));
         }
-        if(stack.isOf(ModItems.FULL_SOUL_CANISTER)){
+        if(stack.isOf(ModItems.FULL_SOUL_CANISTER)&&renderMode != ModelTransformationMode.GUI){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"full_soul_canister_3d","inventory"));
         }
         if(stack.isOf(ModItems.EMPTY_SOUL_GRENADE)){
@@ -46,6 +46,15 @@ public abstract class ItemRendererMixin {
         }
         if(stack.isOf(ModItems.CACOPHONY)){
             return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"cacophony_3d","inventory"));
+        }
+        if(stack.isOf(ModItems.SOLBRAND)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"solbrand_3d","inventory"));
+        }
+        if(stack.isOf(ModItems.GIGATON_HAMMER)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"gigaton_hammer","inventory"));
+        }
+        if(stack.isOf(ModItems.ROCK)){
+            return ((ItemRendererAccessor)this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(JamInAJarMod.MOD_ID,"rock","inventory"));
         }
         return value;
     }

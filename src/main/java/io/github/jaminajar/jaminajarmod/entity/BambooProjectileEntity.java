@@ -1,6 +1,6 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
-import io.github.jaminajar.jaminajarmod.util.CombatUtils;
+import io.github.jaminajar.jaminajarmod.util.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -61,7 +61,7 @@ public class BambooProjectileEntity extends PersistentProjectileEntity {
                             .get(RegistryKeys.DAMAGE_TYPE)
                             .entryOf(ModDamageTypes.BAMBOO_PROJECTILE),owner);
             if(target instanceof LivingEntity livingTarget){
-                CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,3.0f);
+                Utils.CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,3.0f);
                 livingTarget.addStatusEffect(statusEffectInstance);
             } else {
                 target.damage(damageSource,3.0f);

@@ -11,6 +11,8 @@ public class ModEnchantments {
     public static final Enchantment BLAST = register("blast", new BlastEnchantment());
     public static final Enchantment PENTABOOM = register("pentaboom", new PentaboomEnchantment());
     public static final Enchantment SMARTPITCH = register("smartpitch", new SmartPitchEnchantment());
+    public static final Enchantment ROCK_SMASH = register("rock_smash", new RockSmashEnchantment());
+    public static final Enchantment BULLDOZE = register("bulldoze", new BulldozeEnchantment());
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(
                 Registries.ENCHANTMENT,

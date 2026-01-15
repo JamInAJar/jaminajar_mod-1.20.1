@@ -1,6 +1,6 @@
 package io.github.jaminajar.jaminajarmod.mixin;
 
-import io.github.jaminajar.jaminajarmod.enchantment.SmartPitchEnchantment;
+import io.github.jaminajar.jaminajarmod.enchantment.ModEnchantments;
 import io.github.jaminajar.jaminajarmod.items.ModItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -26,7 +26,7 @@ public abstract class LivingEntityMixin extends Entity {
         if ((Object) this instanceof PlayerEntity player) {
             ItemStack mainHandItem = player.getMainHandStack();
 
-            float fallDamageHeliMultiplier = (float) (1.2 - EnchantmentHelper.getLevel(new SmartPitchEnchantment(),mainHandItem));
+            float fallDamageHeliMultiplier = (float) (1.2 - EnchantmentHelper.getLevel(ModEnchantments.SMARTPITCH,mainHandItem));
 
             if (mainHandItem.getItem() == ModItems.HELI_BLADE && player.isUsingItem() && !player.isOnGround()) {
                 float amplifiedFallDistance = fallDistance * fallDamageHeliMultiplier;

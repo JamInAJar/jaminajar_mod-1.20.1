@@ -1,7 +1,7 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
-import io.github.jaminajar.jaminajarmod.util.CombatUtils;
+import io.github.jaminajar.jaminajarmod.util.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -54,7 +54,7 @@ public class NoteProjectileEntity extends PersistentProjectileEntity {
                             .get(RegistryKeys.DAMAGE_TYPE)
                             .entryOf(ModDamageTypes.NOTE_PROJECTILE),owner);
             if (target instanceof LivingEntity livingTarget) {
-                CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,1.5f);
+                Utils.CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,1.5f);
             } else{
                 target.damage(damageSource, 1.5f);
             }

@@ -36,8 +36,8 @@ public class SoulerBeamProjectile extends PersistentProjectileEntity {
     public void tick() {
         super.tick();
         this.setNoGravity(true);
-        if (!this.getWorld().isClient) {
-        }
+//        if (!this.getWorld().isClient) {
+//        }
         if (this.age > 200) {
             this.discard();
         }

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "minecraft:iron_block"
+    },
+    "i": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "n": {
+      "item": "minecraft:netherite_block"
+    },
+    "r": {
+      "item": "minecraft:raw_iron_block"
+    },
+    "s": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "pattern": [
+    "rrc",
+    "cns",
+    " i "
+  ],
+  "result": {
+    "item": "jaminajarmod:gigaton_hammer"
+  },
+  "show_notification": true
+}

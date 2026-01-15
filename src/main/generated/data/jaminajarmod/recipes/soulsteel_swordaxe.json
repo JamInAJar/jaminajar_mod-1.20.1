@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "b": {
+      "item": "jaminajarmod:soulsteel_block"
+    },
+    "i": {
+      "item": "jaminajarmod:soulsteel_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " i ",
+    "ibi",
+    "si "
+  ],
+  "result": {
+    "item": "jaminajarmod:soulsteel_swordaxe"
+  },
+  "show_notification": true
+}

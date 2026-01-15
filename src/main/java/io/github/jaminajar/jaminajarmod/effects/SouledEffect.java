@@ -21,7 +21,7 @@ public class SouledEffect extends StatusEffect {
 
         int level = Objects.requireNonNull(entity.getStatusEffect(ModEffects.SOULED)).getAmplifier();
 
-        entity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
+        Objects.requireNonNull(entity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH))
                 .addPersistentModifier(new EntityAttributeModifier(
                         SOULED_UUID,
                         "souledHealth",

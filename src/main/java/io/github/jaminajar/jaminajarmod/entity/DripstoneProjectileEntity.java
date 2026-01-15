@@ -1,7 +1,7 @@
 package io.github.jaminajar.jaminajarmod.entity;
 
 import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageTypes;
-import io.github.jaminajar.jaminajarmod.util.CombatUtils;
+import io.github.jaminajar.jaminajarmod.util.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -46,7 +46,7 @@ public class DripstoneProjectileEntity extends PersistentProjectileEntity {
                             .get(RegistryKeys.DAMAGE_TYPE)
                             .entryOf(ModDamageTypes.DRIPSTONE_PROJECTILE),owner);
             if(entity instanceof LivingEntity livingTarget){
-                CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,25.0f);
+                Utils.CombatUtils.damageIgnoringIFrames(livingTarget,damageSource,25.0f);
             } else {
                 entity.damage(damageSource,25.0f);
             }

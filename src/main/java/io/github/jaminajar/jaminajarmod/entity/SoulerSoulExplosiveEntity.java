@@ -13,16 +13,16 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
 public class SoulerSoulExplosiveEntity extends PersistentProjectileEntity {
-    public SoulerSoulExplosiveEntity(EntityType<? extends PersistentProjectileEntity> type, LivingEntity owner, World world) {
-        super(type, owner, world);
+    public SoulerSoulExplosiveEntity(EntityType<? extends PersistentProjectileEntity> type, World world) {
+        super(type, world);
     }
     float explosionPower = 0;
     float soulEnergyCount;
     float scalingMult = 1;
-    public void setSoulEnergyCount(int count){
+    public void setSoulEnergyCount(float count){
         this.soulEnergyCount = count;
     }
-    public void setScalingMult(int count){
+    public void setScalingMult(float count){
         this.scalingMult = count;
     }
     @Override
@@ -40,7 +40,7 @@ public class SoulerSoulExplosiveEntity extends PersistentProjectileEntity {
     protected void explode(){
         explosionPower = scalingMult*(4 * soulEnergyCount)/3;
         this.getWorld().createExplosion(this,this.getX(),this.getY(),this.getZ(),explosionPower,true, World.ExplosionSourceType.TNT);
-        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModEffects.SOULED, (int) (explosionPower*20), (int) Math.floor(explosionPower));
+        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(ModEffects.SOULED, (int) (explosionPower*400), (int) Math.floor(explosionPower));
         AreaEffectCloudEntity soulCloud = new AreaEffectCloudEntity(this.getWorld(),this.getX(),this.getY(),this.getZ());
         soulCloud.setRadius(3.0F);
         soulCloud.setRadiusOnUse(-0.5F);
@@ -53,5 +53,9 @@ public class SoulerSoulExplosiveEntity extends PersistentProjectileEntity {
     @Override
     protected ItemStack asItemStack() {
         return null;
+    }
+    public void setOwner(LivingEntity owner) {
+        super.setOwner(owner);
+        this.setPosition(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
 }

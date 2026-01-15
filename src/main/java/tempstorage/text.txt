@@ -1,0 +1,222 @@
+package io.github.jaminajar.jaminajarmod.entity;
+
+import io.github.jaminajar.jaminajarmod.enchantment.ModEnchantments;
+import io.github.jaminajar.jaminajarmod.entity.damage.ModDamageSources;
+import io.github.jaminajar.jaminajarmod.items.ModItems;
+import io.github.jaminajar.jaminajarmod.util.Utils;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+
+/// THIS ROCK HAS TAKEN HOURS AWAY FROM MY LIFE THAT I WILL NEVER GET BACK
+public class RockProjectileEntity extends ThrownItemEntity {
+    public double powerX;
+    public double powerY;
+    public double powerZ;
+
+    protected float getDrag() {
+        return 0.95F;
+    }
+
+    public RockProjectileEntity(EntityType<? extends RockProjectileEntity> type, World world) {
+        super(type, world);
+        this.setNoGravity(false);
+    }
+
+    public RockProjectileEntity(World world) {
+        super(ModEntities.ROCK_PROJECTILE, world);
+    }
+
+    @Override
+    public void tick() {
+        if (!this.getWorld().isClient) {
+            Entity owner = this.getOwner();
+            if (owner == null || owner.isRemoved()) {
+                this.discard();
+                return;
+            }
+        }
+        Vec3d velocity = this.getVelocity()
+                .add(this.powerX, this.powerY, this.powerZ)
+                .multiply(this.getDrag());
+        this.setVelocity(velocity);
+        super.tick();
+    }
+
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        } else {
+            this.scheduleVelocityUpdate();
+            Entity entity = source.getAttacker();
+            if (!(entity instanceof PlayerEntity player)) return false;
+            ItemStack stack = player.getMainHandStack();
+            if (!(stack.isOf(ModItems.GIGATON_HAMMER))) return false;
+
+
+            if (!this.getWorld().isClient) {
+                Vec3d vec3d = entity.getRotationVector();
+                boolean crit = Utils.CombatUtils.isCriticalHit((PlayerEntity) this.getOwner());
+                Vec3d velocity = vec3d.multiply((3 + (double) EnchantmentHelper.getLevel(ModEnchantments.ROCK_SMASH, stack) / 1.5) * (1 + 0.1 * (Utils.OtherUtils.convertBooleanToBinary(crit))));
+                this.setVelocity(velocity);
+                this.velocityDirty = true;
+                this.powerX = vec3d.x * 0.1;
+                this.powerY = vec3d.y * 0.1;
+                this.powerZ = vec3d.z * 0.1;
+                this.setOwner(entity);
+            }
+
+            return true;
+        }
+    }
+
+    @Override
+    public boolean hasNoGravity() {
+        return false;
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> createSpawnPacket() {
+        Entity entity = this.getOwner();
+        int i = entity == null ? 0 : entity.getId();
+        return new EntitySpawnS2CPacket(
+                this.getId(),
+                this.getUuid(),
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                this.getPitch(),
+                this.getYaw(),
+                this.getType(),
+                i,
+                new Vec3d(this.powerX, this.powerY, this.powerZ),
+                0.0
+        );
+    }
+
+    @Override
+    public boolean canHit() {
+        return true;
+    }
+
+    @Override
+    protected boolean canHit(Entity entity) {
+        return true;
+    }
+
+    @Override
+    public void onSpawnPacket(EntitySpawnS2CPacket packet) {
+        super.onSpawnPacket(packet);
+        double d = packet.getVelocityX();
+        double e = packet.getVelocityY();
+        double f = packet.getVelocityZ();
+        double g = Math.sqrt(d * d + e * e + f * f);
+        if (g != 0.0) {
+            this.powerX = d / g * 0.1;
+            this.powerY = e / g * 0.1;
+            this.powerZ = f / g * 0.1;
+        }
+    }
+
+    @Override
+    protected float getGravity() {
+        return 0.06f;
+    }
+
+    @Override
+    protected void onEntityHit(EntityHitResult entityHitResult) {
+        super.onEntityHit(entityHitResult);
+
+        World world = this.getWorld();
+        if (world == null || world.isClient) return;
+        DamageSource source = new ModDamageSources(this.getWorld().getRegistryManager()).flattened(this.getWorld(), this.getOwner());
+
+        float amount = (float) Math.max((this.getVelocity().length()) * 5 + 3, 3);
+        world.addParticle(ParticleTypes.EXPLOSION, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+        for (int i = 0; i < 12; i++) {
+            double angle = (Math.PI * 2 / 12) * i;
+            double speed = 0.2 + world.random.nextDouble() * 0.1;
+            world.addParticle(
+                    ParticleTypes.POOF,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    Math.cos(angle) * speed,
+                    amount/20,
+                    Math.sin(angle) * speed
+            );
+        }
+        world.getOtherEntities(this, this.getBoundingBox().expand(Math.max(0.5f, MathHelper.clamp(amount / 8, 0.5f, 2f))))
+                .forEach(entity -> {
+                    if (entity instanceof LivingEntity living) {
+                        Utils.CombatUtils.damageIgnoringIFrames(living, source, (float) (Math.max(amount - this.getPos().distanceTo(living.getPos()), 0)));
+                        living.takeKnockback(MathHelper.clamp((amount - this.getPos().distanceTo(living.getPos())) / 25, 0.5d, 4d), this.getX() - living.getX(), this.getZ() - living.getZ());
+                    } else {
+                        entity.damage(source, (float) (Math.max(amount - this.getPos().distanceTo(entity.getPos()), 0)));
+                    }
+                });
+
+        System.out.println("entityhit");
+        this.discard();
+    }
+
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        World world = this.getWorld();
+        DamageSource source = new ModDamageSources(this.getWorld().getRegistryManager()).flattened(this.getWorld(), this.getOwner());
+
+        float amount = (float) Math.max((this.getVelocity().length()) * 5 + 3, 3);
+        world.addParticle(ParticleTypes.EXPLOSION, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+        for (int i = 0; i < 12; i++) {
+            double angle = (Math.PI * 2 / 12) * i;
+            double speed = 0.2 + world.random.nextDouble() * 0.1;
+            world.addParticle(
+                    ParticleTypes.POOF,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    Math.cos(angle) * speed,
+                    amount/20,
+                    Math.sin(angle) * speed
+            );
+        }
+        world.getOtherEntities(this, this.getBoundingBox().expand(Math.max(1.5f, MathHelper.clamp(amount / 8, 0.5f, 2f))))
+                .forEach(entity -> {
+                    if (entity instanceof LivingEntity living) {
+                        Utils.CombatUtils.damageIgnoringIFrames(living, source, (float) (Math.max(amount - this.getPos().distanceTo(living.getPos()), 0)));
+                        living.takeKnockback(MathHelper.clamp((amount - this.getPos().distanceTo(living.getPos())) / 25, 0.5d, 4d), this.getX() - living.getX(), this.getZ() - living.getZ());
+                    } else {
+                        entity.damage(source, (float) (Math.max(amount - this.getPos().distanceTo(entity.getPos()), 0)));
+                    }
+
+                });
+
+
+        System.out.println("blockhit");
+
+        this.discard();
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        return ModItems.ROCK;
+    }
+
+}

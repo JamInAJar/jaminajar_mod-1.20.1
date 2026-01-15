@@ -20,6 +20,7 @@ public class ModDamageTypeTagProvider extends TagProvider<DamageType> {
         this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR).add(ModDamageTypes.SOULER_LASER).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.NOTE_PROJECTILE).add(ModDamageTypes.SOULER_SELFSOUL);
         this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ENCHANTMENTS).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.SOULER_SELFSOUL);
         this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_EFFECTS).add(ModDamageTypes.CACOPHONY_OVERBLOW).add(ModDamageTypes.SOULER_SELFSOUL);
-        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_SHIELD).add(ModDamageTypes.DRIPSTONE_PROJECTILE).add(ModDamageTypes.BAMBOO_PROJECTILE);
+        this.getOrCreateTagBuilder(DamageTypeTags.BYPASSES_SHIELD).add(ModDamageTypes.BAMBOO_PROJECTILE);
+        this.getOrCreateTagBuilder(DamageTypeTags.IS_EXPLOSION).add(ModDamageTypes.FLATTENED);
     }
 }

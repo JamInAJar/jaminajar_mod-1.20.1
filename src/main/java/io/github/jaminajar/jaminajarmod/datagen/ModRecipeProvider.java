@@ -15,6 +15,8 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.function.Consumer;
+
+import static io.github.jaminajar.jaminajarmod.block.custom.ModBlocks.SOULSTEEL_BLOCK;
 import static io.github.jaminajar.jaminajarmod.items.ModItems.*;
 import static net.minecraft.item.Items.*;
 
@@ -195,6 +197,74 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         DRIPSTONER                           // result
                 ).criterion(hasItem(DRIPSTONER_UPGRADE_TEMPLATE),conditionsFromItem(DRIPSTONER_UPGRADE_TEMPLATE))
                 .offerTo(exporter, new Identifier(getRecipeName(DRIPSTONER)));
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, SOULSTEEL_INGOT,2)
+                .input(NETHERITE_SCRAP,4)
+                .input(Ingredient.fromTag(ItemTags.SOUL_FIRE_BASE_BLOCKS),4)
+                .input(IRON_INGOT,1)
+                .criterion(hasItem(ANCIENT_DEBRIS),conditionsFromItem(ANCIENT_DEBRIS))
+                .offerTo(exporter, new Identifier("soulsteel_ingot_crafting"));
+        offerReversibleCompactingRecipes(exporter,RecipeCategory.MISC,SOULSTEEL_INGOT,RecipeCategory.BUILDING_BLOCKS,SOULSTEEL_BLOCK);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, GIGATON_HAMMER,1)
+                .pattern("rrc")
+                .pattern("cns")
+                .pattern(" i ")
+                .input('r', RAW_IRON_BLOCK)
+                .input('c',IRON_BLOCK)
+                .input('n', NETHERITE_BLOCK)
+                .input('i',NETHERITE_INGOT)
+                .input('s',NETHERITE_SCRAP)
+                .criterion(hasItem(ROCK),conditionsFromItem(ROCK))
+                .offerTo(exporter, new Identifier(getRecipeName(GIGATON_HAMMER)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ROCK,4)
+                .pattern(" r ")
+                .pattern("rfr")
+                .pattern(" r ")
+                .input('r', ItemTags.STONE_CRAFTING_MATERIALS)
+                .input('f', FLINT)
+                .criterion(hasItem(COBBLESTONE),conditionsFromItem(COBBLESTONE))
+                .offerTo(exporter, new Identifier(getRecipeName(ROCK)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, SOULSTEEL_SWORDAXE,1)
+                .pattern(" i ")
+                .pattern("ibi")
+                .pattern("si ")
+                .input('i', SOULSTEEL_INGOT)
+                .input('b', SOULSTEEL_BLOCK)
+                .input('s', STICK)
+                .criterion(hasItem(SOULSTEEL_INGOT),conditionsFromItem(SOULSTEEL_INGOT))
+                .offerTo(exporter, new Identifier(getRecipeName(SOULSTEEL_SWORDAXE)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, SOULSTEEL_AXESWORD,1)
+                .pattern(" is")
+                .pattern("ibi")
+                .pattern(" i ")
+                .input('i', SOULSTEEL_INGOT)
+                .input('b', SOULSTEEL_BLOCK)
+                .input('s', STICK)
+                .criterion(hasItem(SOULSTEEL_INGOT),conditionsFromItem(SOULSTEEL_INGOT))
+                .offerTo(exporter, new Identifier(getRecipeName(SOULSTEEL_AXESWORD)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, SOULSTEEL_PICKAXE,1)
+                .pattern("iii")
+                .pattern(" s ")
+                .pattern(" s ")
+                .input('i', SOULSTEEL_INGOT)
+                .input('s', STICK)
+                .criterion(hasItem(SOULSTEEL_INGOT),conditionsFromItem(SOULSTEEL_INGOT))
+                .offerTo(exporter, new Identifier(getRecipeName(SOULSTEEL_PICKAXE)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, SOULSTEEL_SHOVEL,1)
+                .pattern("i")
+                .pattern("s")
+                .pattern("s")
+                .input('i', SOULSTEEL_INGOT)
+                .input('s', STICK)
+                .criterion(hasItem(SOULSTEEL_INGOT),conditionsFromItem(SOULSTEEL_INGOT))
+                .offerTo(exporter, new Identifier(getRecipeName(SOULSTEEL_SHOVEL)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, SOULSTEEL_HOE,1)
+                .pattern("ii")
+                .pattern(" s")
+                .pattern(" s")
+                .input('i', SOULSTEEL_INGOT)
+                .input('s', STICK)
+                .criterion(hasItem(SOULSTEEL_INGOT),conditionsFromItem(SOULSTEEL_INGOT))
+                .offerTo(exporter, new Identifier(getRecipeName(SOULSTEEL_HOE)));
 
     }
 }

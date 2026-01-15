@@ -77,6 +77,34 @@ public class ModEntities {
                     .trackRangeChunks(4)
                     .trackedUpdateRate(10)
                     .build());
+    public static final EntityType<ShockwaveEntity> SHOCKWAVE =
+            Registry.register(
+                    Registries.ENTITY_TYPE,
+                    new Identifier("jaminajarmod", "shockwave"),
+                    FabricEntityTypeBuilder.create(SpawnGroup.MISC, ShockwaveEntity::new)
+                            .dimensions(EntityDimensions.fixed(2f, 2f))
+                            .trackRangeBlocks(32)
+                            .trackedUpdateRate(10)
+                            .build()
+            );
+    public static final EntityType<RockProjectileEntity> ROCK_PROJECTILE =
+            Registry.register(
+                    Registries.ENTITY_TYPE,
+                    new Identifier("jaminajarmod", "rock"),
+                    FabricEntityTypeBuilder.<RockProjectileEntity>create(SpawnGroup.MISC, RockProjectileEntity::new)
+                            .dimensions(EntityDimensions.fixed(1.5f, 1.5f))
+                            .trackRangeBlocks(32)
+                            .trackedUpdateRate(10)
+                            .build()
+            );
+//    public static final EntityType<SoulerSoulBombEntity> SOUL_BOMB = Registry.register(Registries.ENTITY_TYPE,
+//            new Identifier(JamInAJarMod.MOD_ID,"soul_bomb"),
+//            FabricEntityTypeBuilder.<SoulerSoulBombEntity>create(SpawnGroup.MISC,SoulerSoulBombEntity::new)
+//                    .dimensions(EntityDimensions
+//                            .fixed(0.625f,1.0f))
+//                    .trackRangeChunks(4)
+//                    .trackedUpdateRate(10)
+//                    .build());
     private World world;
 
 
